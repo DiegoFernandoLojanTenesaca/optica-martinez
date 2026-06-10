@@ -78,12 +78,15 @@ function Glasses({ mobile }: { mobile: boolean }) {
     () =>
       mobile
         ? new THREE.MeshPhysicalMaterial({
-            color: new THREE.Color("#cfdcea"),
+            color: new THREE.Color("#dde8f2"),
             transparent: true,
-            opacity: 0.4,
-            roughness: 0.12,
-            metalness: 0,
+            opacity: 0.5,
+            roughness: 0.05,
+            metalness: 0.1,
             clearcoat: 1,
+            clearcoatRoughness: 0.05,
+            reflectivity: 0.6,
+            envMapIntensity: 1.5,
           })
         : new THREE.MeshPhysicalMaterial({
             color: new THREE.Color("#eaf0f6"),
@@ -188,8 +191,10 @@ export default function Glasses3D() {
         <Float speed={1.1} rotationIntensity={0.04} floatIntensity={mobile ? 0.2 : 0.28}>
           <Glasses mobile={mobile} />
         </Float>
-        {/* Environment y sombras solo en desktop (en celular pesan demasiado) */}
-        {!mobile && <Environment preset="studio" />}
+        {/* Environment da los reflejos (acetato/vidrio se ven premium).
+            En celular usa baja resolución para que no pese; las sombras
+            sí se quedan solo en desktop. */}
+        <Environment preset="studio" resolution={mobile ? 64 : 256} />
         {!mobile && (
           <ContactShadows
             position={[0, -1.55, 0]}
