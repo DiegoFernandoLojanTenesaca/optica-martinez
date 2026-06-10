@@ -228,17 +228,17 @@ function Hero() {
             >
               <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
                 <motion.span custom={0} variants={heroLine} initial="hidden" animate="show" className="block">
-                  Ver bien,
+                  Mira bien,
                 </motion.span>
               </span>
               <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
                 <motion.span custom={1} variants={heroLine} initial="hidden" animate="show" className="block">
-                  para <span className="display-italic text-primary">vivir</span>
+                  luce
                 </motion.span>
               </span>
               <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
                 <motion.span custom={2} variants={heroLine} initial="hidden" animate="show" className="block">
-                  <span className="display-italic">mejor.</span>
+                  <span className="display-italic text-primary">increíble.</span>
                 </motion.span>
               </span>
             </h1>
