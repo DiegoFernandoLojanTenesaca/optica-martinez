@@ -82,6 +82,20 @@ const SCHEMA = {
     ratingValue: "5.0",
     reviewCount: "25",
   },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:30",
+      closes: "20:30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "10:00",
+      closes: "18:30",
+    },
+  ],
   sameAs: [
     "https://www.instagram.com/martinezoptometry/",
     "https://www.tiktok.com/@optica.martinez.o",
@@ -870,8 +884,8 @@ function Visit() {
                 {
                   icon: Clock,
                   k: "Horario",
-                  t: "Desde 9:30 a. m.",
-                  d: "Confírmanos tu visita por WhatsApp",
+                  t: "Lun a Vie · 9:30–20:30",
+                  d: "Sábado 10:00–18:30 · Domingo cerrado",
                 },
                 {
                   icon: Phone,
