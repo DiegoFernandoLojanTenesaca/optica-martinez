@@ -44,19 +44,19 @@ function Glasses({ mobile }: { mobile: boolean }) {
       bevelEnabled: true,
       bevelThickness: 0.035,
       bevelSize: 0.025,
-      bevelSegments: mobile ? 3 : 6,
-      curveSegments: mobile ? 48 : 110,
+      bevelSegments: mobile ? 5 : 6,
+      curveSegments: mobile ? 100 : 110,
     });
     geo.center();
     return geo;
   }, [mobile]);
 
   const lensGeo = useMemo(
-    () => new THREE.SphereGeometry(innerR, mobile ? 28 : 64, mobile ? 28 : 64),
+    () => new THREE.SphereGeometry(innerR, mobile ? 48 : 64, mobile ? 48 : 64),
     [mobile],
   );
   const glintGeo = useMemo(
-    () => new THREE.TorusGeometry(innerR * 0.52, 0.05, mobile ? 8 : 14, mobile ? 28 : 56, 1.5),
+    () => new THREE.TorusGeometry(innerR * 0.52, 0.05, mobile ? 12 : 14, mobile ? 44 : 56, 1.5),
     [mobile],
   );
 
@@ -179,7 +179,7 @@ export default function Glasses3D() {
   return (
     <Canvas
       camera={{ position: [0, 0.05, mobile ? 8.2 : 5.9], fov: 32 }}
-      dpr={mobile ? [1, 2] : [1, 1.8]}
+      dpr={mobile ? [1.5, 2.5] : [1, 1.8]}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
     >
