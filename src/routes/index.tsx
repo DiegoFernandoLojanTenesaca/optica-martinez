@@ -82,12 +82,22 @@ function Header() {
       }`}
     >
       <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6 px-6 py-5 lg:px-10">
-        <a
-          href="#top"
-          className="font-display text-2xl tracking-tight ink"
-          style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}
-        >
-          <span className="italic">Óptica</span>&nbsp;Martínez
+        <a href="#top" className="flex items-center gap-3">
+          <motion.img
+            src="/logo.jpg"
+            alt="Óptica Martínez — Optometría"
+            initial={{ opacity: 0, scale: 0.6, rotate: -12 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
+            whileHover={{ rotate: 6, scale: 1.06 }}
+            className="h-11 w-11 rounded-full"
+          />
+          <span
+            className="hidden font-display text-xl tracking-tight ink sm:block"
+            style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}
+          >
+            <span className="italic">Óptica</span>&nbsp;Martínez
+          </span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -273,7 +283,7 @@ function Hero() {
                 </span>
               </div>
               <div className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                +1.000 pacientes
+                Reseñas verificadas
               </div>
               <div className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
                 Examen garantizado
@@ -660,10 +670,10 @@ function About() {
                   className="mt-3 font-display text-5xl"
                   style={{ fontWeight: 300 }}
                 >
-                  +1.000
+                  5.0★
                 </p>
                 <p className="mt-2 text-sm text-background/70">
-                  pacientes atendidos en Loja
+                  calificación promedio en Google Reviews
                 </p>
               </div>
               <span className="font-display text-xs text-background/40">/ 03</span>
@@ -792,8 +802,8 @@ function Visit() {
                 {
                   icon: Clock,
                   k: "Horario",
-                  t: "Lunes a sábado",
-                  d: "Atención desde las 9:30 a. m.",
+                  t: "Desde 9:30 a. m.",
+                  d: "Confírmanos tu visita por WhatsApp",
                 },
                 {
                   icon: Phone,
@@ -887,6 +897,11 @@ function Footer() {
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid grid-cols-12 gap-6 border-b border-background/15 pb-16 lg:gap-10">
           <div className="col-span-12 lg:col-span-6">
+            <img
+              src="/logo.jpg"
+              alt="Óptica Martínez"
+              className="mb-7 h-16 w-16 rounded-full ring-1 ring-background/20"
+            />
             <p
               className="font-display tracking-[-0.03em]"
               style={{
