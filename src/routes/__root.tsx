@@ -77,12 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Óptica Martínez · Loja, Ecuador" },
+      { title: "Óptica Martínez" },
       { name: "description", content: "Óptica en Loja: examen visual gratis, armazones de marca y lunas de alta calidad. 5.0★ en Google." },
       { name: "author", content: "Óptica Martínez" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "icon", type: "image/jpeg", href: "/logo.jpg" },
+      { rel: "apple-touch-icon", href: "/logo.jpg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,50..100&family=Geist:wght@300;400;500;600;700&display=swap" },

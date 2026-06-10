@@ -26,7 +26,7 @@ const Glasses3D = lazy(() => import("@/components/Glasses3D"));
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Óptica Martínez · Óptica de precisión en Loja, Ecuador" },
+      { title: "Óptica Martínez" },
       {
         name: "description",
         content:
@@ -93,7 +93,7 @@ function Header() {
             className="h-11 w-11 rounded-full"
           />
           <span
-            className="hidden font-display text-xl tracking-tight ink sm:block"
+            className="font-display text-lg tracking-tight ink sm:text-xl"
             style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100' }}
           >
             <span className="italic">Óptica</span>&nbsp;Martínez

@@ -5,11 +5,12 @@ import * as THREE from "three";
 
 function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
   const group = useRef<THREE.Group>(null);
-  const lid = useRef<THREE.Group>(null);
+  const lidTop = useRef<THREE.Group>(null);
+  const lidBottom = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const winkT0 = useRef(-10);
 
-  // Seguimiento del mouse en TODA la página (más natural)
+  // Seguimiento del mouse en TODA la página
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -19,35 +20,33 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     const t = state.clock.elapsedTime;
     if (group.current) {
-      const idleY = Math.sin(t * 0.45) * 0.1;
-      const targetY = idleY + mouse.current.x * 0.42;
-      const targetX = -mouse.current.y * 0.22;
-      // lerp más alto = responde sin "retraso"
-      group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetY, 0.13);
-      group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, targetX, 0.13);
+      const idleY = Math.sin(t * 0.4) * 0.08;
+      const targetY = idleY + mouse.current.x * 0.4;
+      const targetX = -mouse.current.y * 0.2;
+      // damp = suavizado fluido e independiente de los FPS
+      group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 7, delta);
+      group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 7, delta);
     }
-    // Guiño DISPARADO AL CLICK
+    // Guiño AL CLICK: los párpados cierran hacia el centro (no "baja una cosa")
     if (winkReq.current) {
       winkReq.current = false;
       winkT0.current = t;
     }
-    if (lid.current) {
-      const c = t - winkT0.current;
-      let v = 0;
-      if (c >= 0 && c < 0.85) v = Math.sin((c / 0.85) * Math.PI); // 0 → 1 → 0 (guiño lento)
-      lid.current.scale.y = v;
-    }
+    const c = t - winkT0.current;
+    let v = 0;
+    if (c >= 0 && c < 0.85) v = Math.sin((c / 0.85) * Math.PI); // 0 → 1 → 0 (lento)
+    if (lidTop.current) lidTop.current.scale.y = v;
+    if (lidBottom.current) lidBottom.current.scale.y = v;
   });
 
   const outerR = 0.92;
-  const innerR = 0.83; // marco aún más FINO (outerR - innerR = 0.09)
+  const innerR = 0.83; // marco fino (aro = 0.09)
   const frameDepth = 0.14;
   const lensOffset = 1.04;
 
-  // Aro redondo, delgado, con un poco de volumen
   const ringGeo = useMemo(() => {
     const shape = new THREE.Shape();
     shape.absarc(0, 0, outerR, 0, Math.PI * 2, false);
@@ -58,7 +57,7 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
       depth: frameDepth,
       bevelEnabled: true,
       bevelThickness: 0.035,
-      bevelSize: 0.03,
+      bevelSize: 0.025,
       bevelSegments: 6,
       curveSegments: 120,
     });
@@ -67,9 +66,9 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
   }, []);
 
   const lensGeo = useMemo(() => new THREE.SphereGeometry(innerR, 64, 64), []);
-  const lidGeo = useMemo(() => new THREE.CircleGeometry(innerR * 0.98, 48), []);
-  // Arco de reflejo (highlight) dentro del lente, como en el logo
   const glintGeo = useMemo(() => new THREE.TorusGeometry(innerR * 0.5, 0.028, 10, 40, 1.4), []);
+  // Medio párpado (plano) — dos de estos cierran hacia el centro = guiño
+  const lidGeo = useMemo(() => new THREE.PlaneGeometry(innerR * 2.1, innerR), []);
 
   const black = useMemo(
     () =>
@@ -81,10 +80,6 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
         clearcoatRoughness: 0.08,
         envMapIntensity: 1.0,
       }),
-    []
-  );
-  const metal = useMemo(
-    () => new THREE.MeshStandardMaterial({ color: new THREE.Color("#202022"), roughness: 0.3, metalness: 0.9 }),
     []
   );
   const glass = useMemo(
@@ -112,53 +107,53 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
 
   return (
     <group ref={group} scale={0.72}>
-      {/* Ojos: aro + lente + reflejo (como el icono) */}
+      {/* Ojos: aro + lente + reflejo */}
       {[-1, 1].map((s) => (
         <group key={s} position={[s * lensOffset, 0, 0]}>
           <mesh geometry={ringGeo} material={black} />
           <mesh geometry={lensGeo} material={glass} scale={[1, 1, 0.16]} />
-          <mesh
-            geometry={glintGeo}
-            material={glint}
-            position={[-0.12, 0.18, 0.13]}
-            rotation={[0, 0, 1.95]}
-          />
+          <mesh geometry={glintGeo} material={glint} position={[-0.12, 0.18, 0.13]} rotation={[0, 0, 1.95]} />
         </group>
       ))}
 
-      {/* Párpado del guiño (ojo izquierdo) — delante del reflejo para taparlo al cerrar */}
-      <group ref={lid} position={[-lensOffset, innerR * 0.98, 0.18]} scale={[1, 0, 1]}>
-        <mesh geometry={lidGeo} material={black} position={[0, -innerR * 0.98, 0]} />
+      {/* Guiño del ojo izquierdo: párpado superior baja + inferior sube */}
+      <group position={[-lensOffset, 0, 0.16]}>
+        <group ref={lidTop} position={[0, innerR, 0]} scale={[1, 0, 1]}>
+          <mesh geometry={lidGeo} material={black} position={[0, -innerR / 2, 0]} />
+        </group>
+        <group ref={lidBottom} position={[0, -innerR, 0]} scale={[1, 0, 1]}>
+          <mesh geometry={lidGeo} material={black} position={[0, innerR / 2, 0]} />
+        </group>
       </group>
 
       {/* Puente */}
       <mesh material={black} position={[0, 0.16, 0]}>
-        <torusGeometry args={[0.3, 0.055, 20, 60, Math.PI]} />
+        <torusGeometry args={[0.3, 0.05, 20, 60, Math.PI]} />
       </mesh>
 
       {/* Plaquetas de nariz */}
       {[-1, 1].map((s) => (
         <mesh key={`nose-${s}`} material={black} position={[s * 0.26, -0.1, 0.1]}>
-          <capsuleGeometry args={[0.03, 0.16, 4, 8]} />
+          <capsuleGeometry args={[0.028, 0.16, 4, 8]} />
         </mesh>
       ))}
 
-      {/* Bisagras tipo botón (como el logo) + patillas */}
+      {/* Bisagras (botón) + patillas — CONECTADAS al borde del aro */}
       {[-1, 1].map((s) => {
-        const hingeX = s * (lensOffset + outerR - 0.02);
+        const edgeX = s * (lensOffset + outerR); // borde externo del aro
         return (
-          <group key={`temple-${s}`} position={[hingeX, 0.05, 0]}>
-            <mesh material={black} position={[s * 0.04, 0, 0.05]}>
-              <sphereGeometry args={[0.075, 20, 20]} />
+          <group key={`temple-${s}`} position={[edgeX, 0, 0]}>
+            {/* botón de bisagra, solapado al aro */}
+            <mesh material={black} position={[s * -0.03, 0, 0.03]}>
+              <sphereGeometry args={[0.07, 20, 20]} />
             </mesh>
-            <mesh material={metal} position={[s * 0.05, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-              <cylinderGeometry args={[0.04, 0.04, 0.1, 12]} />
+            {/* patilla: arranca en el borde y va recta hacia atrás */}
+            <mesh material={black} position={[s * 0.04, 0, -0.72]} rotation={[0, s * 0.08, 0]}>
+              <boxGeometry args={[0.07, 0.085, 1.5]} />
             </mesh>
-            <mesh material={black} position={[s * 0.2, 0, -0.7]} rotation={[0, s * 0.1, 0]}>
-              <boxGeometry args={[0.07, 0.09, 1.4]} />
-            </mesh>
-            <mesh material={black} position={[s * 0.33, -0.13, -1.38]} rotation={[0.5, s * 0.1, 0]}>
-              <boxGeometry args={[0.065, 0.085, 0.4]} />
+            {/* terminal (codo) que baja */}
+            <mesh material={black} position={[s * 0.16, -0.13, -1.42]} rotation={[0.5, s * 0.08, 0]}>
+              <boxGeometry args={[0.065, 0.08, 0.42]} />
             </mesh>
           </group>
         );
