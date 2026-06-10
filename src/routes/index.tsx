@@ -744,10 +744,10 @@ function Reviews() {
           kicker="Reseñas"
           title={
             <>
-              Lo que dicen <span className="display-italic">en Google.</span>
+              Nuestras <span className="display-italic">reseñas.</span>
             </>
           }
-          intro={`${data.rating.toFixed(1)} estrellas en Google. Esto cuentan quienes ya nos visitaron.`}
+          intro={`${data.rating.toFixed(1)} estrellas en Google. Esto dicen quienes ya nos visitaron.`}
         />
 
         <div className="mt-16 grid grid-cols-12 gap-x-6 gap-y-16 lg:gap-x-10">
