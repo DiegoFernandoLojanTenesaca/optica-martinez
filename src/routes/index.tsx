@@ -20,6 +20,10 @@ import {
   Sparkle,
   ShieldCheck,
 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import EyeChart from "@/components/EyeChart";
+import BrandStrip from "@/components/BrandStrip";
+import { getReviews } from "@/lib/reviews";
 
 const Glasses3D = lazy(() => import("@/components/Glasses3D"));
 
@@ -30,13 +34,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Óptica de precisión en Loja. Examen visual sin costo, armazones de autor y lunas de alta tecnología. 5.0★ en Google. Lic. Luis Martínez, Mgtr.",
+          "Óptica en el centro de Loja: examen visual gratis, armazones de marca como MAX&Co y lentes de calidad. 5.0★ en Google. Atendido por el Lic. Luis Martínez.",
       },
       { property: "og:title", content: "Óptica Martínez · Loja, Ecuador" },
       {
         property: "og:description",
         content:
-          "Examen visual sin costo, armazones de autor y lunas de alta tecnología en el centro de Loja.",
+          "Examen visual gratis, armazones de marca y lentes de calidad en el centro de Loja.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -86,10 +90,14 @@ function Header() {
           <motion.img
             src="/logo.jpg"
             alt="Óptica Martínez — Optometría"
-            initial={{ opacity: 0, scale: 0.6, rotate: -12 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
-            whileHover={{ rotate: 6, scale: 1.06 }}
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1, scaleY: [1, 1, 0.1, 1] }}
+            transition={{
+              opacity: { duration: 0.8, ease: EASE, delay: 0.1 },
+              scale: { duration: 0.8, ease: EASE, delay: 0.1 },
+              scaleY: { duration: 5, times: [0, 0.92, 0.96, 1], repeat: Infinity, ease: "easeInOut" },
+            }}
+            whileHover={{ scale: 1.08 }}
             className="h-11 w-11 rounded-full"
           />
           <span
@@ -229,9 +237,9 @@ function Hero() {
               transition={{ duration: 0.8, ease: EASE, delay: 0.7 }}
               className="mt-10 max-w-md text-pretty text-base leading-relaxed text-muted-foreground"
             >
-              Óptica de precisión en el centro de Loja. Diagnóstico clínico
-              riguroso, armazones seleccionados con criterio y lunas de alta
-              tecnología — al cuidado del Lic. Luis Martínez, Mgtr.
+              En pleno centro de Loja te revisamos la vista sin costo y te
+              ayudamos a elegir los lentes que mejor te quedan. Atendido por el
+              Lic. Luis Martínez, Mgtr.
             </motion.p>
 
             <motion.div
@@ -394,33 +402,33 @@ function SectionHeader({
 const services = [
   {
     icon: ScanEye,
-    title: "Examen visual sin costo",
-    desc: "Evaluación clínica completa con equipamiento de última generación. Diagnóstico riguroso y plan personalizado.",
+    title: "Examen visual gratis",
+    desc: "Te revisamos la vista con equipos modernos y te explicamos todo con calma. Sin costo.",
   },
   {
     icon: Layers,
-    title: "Lunas oftálmicas",
-    desc: "Lunas monofocales, progresivas y ocupacionales con tratamientos antirreflejo, fotocromáticos y filtro luz azul.",
+    title: "Lentes (lunas)",
+    desc: "Monofocales, progresivos, antirreflejo, fotocromáticos y con filtro de luz azul.",
   },
   {
     icon: Aperture,
-    title: "Armazones de autor",
-    desc: "Selección curada con marcas referentes como MAX&Co. Asesoría individual según morfología y estilo.",
+    title: "Armazones de marca",
+    desc: "Marcas como MAX&Co y muchas más. Te ayudamos a encontrar el que va con tu cara.",
   },
   {
     icon: CircleDot,
     title: "Lentes de contacto",
-    desc: "Adaptación profesional de lentes blandos, tóricos y especializados. Seguimiento clínico continuo.",
+    desc: "Blandos, tóricos y especiales, con la adaptación y el seguimiento que necesitas.",
   },
   {
     icon: Sparkle,
-    title: "Cuidado y accesorios",
-    desc: "Estuches, soluciones de limpieza y accesorios premium para prolongar la vida útil de su equipo visual.",
+    title: "Accesorios y cuidado",
+    desc: "Estuches, líquidos y todo lo que necesitas para mantener tus lentes como nuevos.",
   },
   {
     icon: ShieldCheck,
-    title: "Garantía y postventa",
-    desc: "Lunas y armazones garantizados. Ajustes, mantenimiento y acompañamiento durante todo el uso.",
+    title: "Garantía",
+    desc: "Lunas y armazones con garantía. Y los ajustes que necesites, cuando los necesites.",
   },
 ];
 
@@ -433,10 +441,10 @@ function Services() {
           kicker="Servicios"
           title={
             <>
-              Cuidado visual <span className="display-italic">de precisión.</span>
+              Todo para tu <span className="display-italic">vista.</span>
             </>
           }
-          intro="Una práctica clínica centrada en el paciente: diagnóstico minucioso, soluciones técnicas adecuadas y un seguimiento que respalda cada decisión."
+          intro="Examen, lentes, armazones y mantenimiento — todo en un solo lugar y con buena atención."
         />
 
         <div className="mt-16 grid grid-cols-12 gap-x-6 gap-y-12 lg:gap-x-10">
@@ -550,10 +558,10 @@ function Collection() {
           kicker="Colección"
           title={
             <>
-              Armazones <span className="display-italic">seleccionados</span> con criterio.
+              Armazones para <span className="display-italic">cada estilo.</span>
             </>
           }
-          intro="Una curaduría que reúne marcas referentes como MAX&Co. Piezas con identidad, calidad de manufactura y un ajuste pensado para cada rostro."
+          intro="Marcas como MAX&Co y modelos para todos los gustos. Pásate a probártelos sin compromiso."
         />
 
         {/* Editorial masonry */}
@@ -592,7 +600,7 @@ function About() {
           kicker="Nosotros"
           title={
             <>
-              Práctica clínica con <span className="display-italic">criterio humano.</span>
+              Cerca de ti, <span className="display-italic">de verdad.</span>
             </>
           }
         />
@@ -609,19 +617,18 @@ function About() {
               className="font-display text-2xl leading-snug ink lg:text-3xl"
               style={{ fontWeight: 400 }}
             >
-              Brindamos una experiencia de salud visual rigurosa y cercana:
-              <span className="display-italic"> exámenes garantizados</span>,
-              lunas de alta tecnología a precios responsables y una asesoría
-              honesta para elegir la pieza adecuada — sin atajos, sin
-              fórmulas genéricas.
+              En Óptica Martínez cuidamos tu vista con calma y honestidad:
+              <span className="display-italic"> examen garantizado</span>, lunas
+              de calidad a buen precio y la asesoría que necesitas para elegir
+              tranquilo. Sin apuros y sin venderte de más.
             </p>
 
             <div className="mt-12 grid gap-x-10 gap-y-6 sm:grid-cols-2">
               {[
-                "Optómetras certificados con formación de posgrado",
-                "Equipamiento clínico moderno y calibrado",
-                "Asesoría honesta y sin presiones comerciales",
-                "Garantía respaldada en lunas y armazones",
+                "Optómetras titulados y con experiencia",
+                "Equipos modernos para un examen completo",
+                "Te asesoramos sin presionarte a comprar",
+                "Garantía en lunas y armazones",
               ].map((p) => (
                 <div key={p} className="flex items-start gap-3 border-t border-hairline pt-4">
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
@@ -686,26 +693,36 @@ function About() {
 }
 
 /* -------------------------------------------------------- REVIEWS */
-const reviews = [
+const FALLBACK_REVIEWS = [
   {
     name: "Fernando Lojan",
+    rating: 5,
     text: "Muy buena atención desde el primer momento. Fueron amables, pacientes y resolvieron todas mis dudas durante el examen visual. Me asesoraron muy bien en la elección de mis lentes.",
   },
   {
     name: "Maily Chamba",
+    rating: 5,
     text: "Excelente servicio. El examen de vista fue muy completo y se nota que trabajan con tecnología de calidad. El personal es muy profesional.",
   },
   {
     name: "Carlos Severino",
+    rating: 5,
     text: "La mejor óptica de Loja. Excelente servicio y atención.",
   },
   {
     name: "María Fernanda Correa",
+    rating: 5,
     text: "La atención es increíble, te asesoran en todo y aclaran todas las dudas. Recomendadísimo.",
   },
 ];
 
 function Reviews() {
+  const { data } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: () => getReviews(),
+    initialData: { reviews: FALLBACK_REVIEWS, rating: 5.0, total: 25, live: false },
+    staleTime: 1000 * 60 * 30,
+  });
   return (
     <section id="resenas" className="bg-sand py-24 lg:py-36 relative overflow-hidden grain">
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
@@ -714,14 +731,14 @@ function Reviews() {
           kicker="Reseñas"
           title={
             <>
-              Pacientes que <span className="display-italic">recomiendan.</span>
+              Lo que dicen <span className="display-italic">en Google.</span>
             </>
           }
-          intro="5.0 estrellas en Google Reviews. Testimonios reales de quienes confían en nuestro trabajo."
+          intro={`${data.rating.toFixed(1)} estrellas en Google. Esto cuentan quienes ya nos visitaron.`}
         />
 
         <div className="mt-16 grid grid-cols-12 gap-x-6 gap-y-16 lg:gap-x-10">
-          {reviews.map((r, i) => (
+          {data.reviews.map((r, i) => (
             <motion.figure
               key={r.name}
               initial={{ opacity: 0, y: 24 }}
@@ -839,10 +856,10 @@ function Visit() {
                 className="font-display text-3xl leading-tight ink"
                 style={{ fontWeight: 400 }}
               >
-                Reserve su examen visual <span className="display-italic">sin costo</span>.
+                Agenda tu examen <span className="display-italic">gratis</span>.
               </p>
               <p className="mt-3 text-sm text-muted-foreground">
-                Escríbanos por WhatsApp y coordinamos su cita en minutos.
+                Escríbenos por WhatsApp y coordinamos tu cita en minutos.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
@@ -999,8 +1016,10 @@ function Landing() {
       <Header />
       <main>
         <Hero />
+        <BrandStrip />
         <Services />
         <Collection />
+        <EyeChart />
         <About />
         <Reviews />
         <Visit />
