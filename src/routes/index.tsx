@@ -43,6 +43,9 @@ export const Route = createFileRoute("/")({
           "Examen visual gratis, armazones de marca y lentes de calidad en el centro de Loja.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.png" },
+      { property: "og:locale", content: "es_EC" },
+      { name: "twitter:image", content: "/og-image.png" },
     ],
   }),
   component: Landing,
@@ -59,6 +62,31 @@ function scrollToId(e: MouseEvent<HTMLAnchorElement>, href: string) {
   e.preventDefault();
   document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+// Datos estructurados para Google (negocio local / óptica)
+const SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Optician",
+  name: "Óptica Martínez",
+  image: "/og-image.png",
+  telephone: "+593967794351",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Plaza TOA, Simón Bolívar entre Lourdes y Catacocha",
+    addressLocality: "Loja",
+    addressCountry: "EC",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "25",
+  },
+  sameAs: [
+    "https://www.instagram.com/martinezoptometry/",
+    "https://www.tiktok.com/@optica.martinez.o",
+  ],
+};
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -905,6 +933,15 @@ function Visit() {
                   <Phone className="h-4 w-4" strokeWidth={1.5} />
                   099 133 7101
                 </a>
+                <a
+                  href="https://www.google.com/maps/dir/?api=1&destination=Optica+Martinez+Loja&destination_place_id=ChIJc16zJYk3y5ERHamuouhxCF8"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-hairline px-6 py-3.5 text-xs font-medium uppercase tracking-[0.16em] ink transition-colors hover:border-[var(--color-ink)]"
+                >
+                  <MapPin className="h-4 w-4" strokeWidth={1.5} />
+                  Cómo llegar
+                </a>
               </div>
             </motion.div>
           </motion.div>
@@ -1053,6 +1090,7 @@ function FloatingWhatsApp() {
 function Landing() {
   return (
     <div className="min-h-screen bg-background">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }} />
       <Header />
       <main>
         <Hero />
