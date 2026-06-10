@@ -139,7 +139,7 @@ function Header() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6 px-6 py-5 lg:px-10">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 py-5 lg:px-10">
         <a
           href="#top"
           onClick={(e) => scrollToId(e, "#top")}
@@ -206,7 +206,7 @@ function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-hairline bg-background/95 backdrop-blur-xl md:hidden">
+        <div className="border-t border-hairline bg-background backdrop-blur-xl md:hidden">
           <div className="flex flex-col px-6 py-4">
             {navItems.map((n) => (
               <a
