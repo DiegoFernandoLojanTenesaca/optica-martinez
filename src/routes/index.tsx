@@ -710,22 +710,32 @@ const FALLBACK_REVIEWS = [
   {
     name: "Fernando Lojan",
     rating: 5,
-    text: "Muy buena atención desde el primer momento. Fueron amables, pacientes y resolvieron todas mis dudas durante el examen visual. Me asesoraron muy bien en la elección de mis lentes.",
+    text: "Muy buena atención desde el primer momento. Fueron amables, pacientes y resolvieron todas mis dudas durante el examen visual. Me asesoraron muy bien en la elección de mis lentes y quedé muy satisfecho con el servicio.",
   },
   {
     name: "Maily Chamba",
     rating: 5,
-    text: "Excelente servicio. El examen de vista fue muy completo y se nota que trabajan con tecnología de calidad. El personal es muy profesional.",
+    text: "Recibí un excelente servicio. El examen de vista fue muy completo y se nota que trabajan con tecnología de calidad. El personal es muy profesional, amable y explica todo con paciencia.",
   },
   {
     name: "Carlos Severino",
     rating: 5,
-    text: "La mejor óptica de Loja. Excelente servicio y atención.",
+    text: "La mejor óptica de Loja. Excelente servicio y atención. Se nota que realmente se preocupan por el bienestar visual de sus pacientes. ¡Totalmente recomendado!",
   },
   {
     name: "María Fernanda Correa",
     rating: 5,
     text: "La atención es increíble, te asesoran en todo y aclaran todas las dudas. Recomendadísimo.",
+  },
+  {
+    name: "Andrea Bazurto",
+    rating: 5,
+    text: "Excelente servicio y asesoramiento de primera. Calidad en lunas y armazones, me encantaron los precios y la atención.",
+  },
+  {
+    name: "César Rojas",
+    rating: 5,
+    text: "Una excelente óptica: personal capacitado, amabilidad, buen trato y muy eficiente.",
   },
 ];
 
