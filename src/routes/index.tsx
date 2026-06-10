@@ -48,9 +48,10 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const WHATSAPP_URL =
-  "https://wa.me/593967794351?text=" +
-  encodeURIComponent("Hola, quiero agendar mi examen visual gratis");
+const WA_NUMBER = "593967794351";
+// Mensajes precargados según el contexto del botón
+const wa = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+const WHATSAPP_URL = wa("Hola, quiero agendar mi examen visual gratis 👓");
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -89,7 +90,7 @@ function Header() {
         <a href="#top" className="flex items-center gap-3">
           <motion.img
             src="/logo.jpg"
-            alt="Óptica Martínez — Optometría"
+            alt="Óptica Martínez Optometría"
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1, scaleY: [1, 1, 0.1, 1] }}
             transition={{
@@ -199,7 +200,7 @@ function Hero() {
         >
           <span className="kicker">Óptica Martínez · Loja, Ecuador</span>
           <span className="hidden font-display text-xs tracking-wider text-muted-foreground sm:block">
-            Est. — Plaza TOA
+            Estamos en Plaza TOA
           </span>
         </motion.div>
 
@@ -340,7 +341,7 @@ function Hero() {
           </span>
           <div className="h-px w-24 origin-left animate-pulse bg-[var(--color-ink)] opacity-30" />
           <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-            01 — 05
+            01 / 05
           </span>
         </motion.div>
       </div>
@@ -375,7 +376,7 @@ function SectionHeader({
         >
           {n}
         </span>
-        <span className="kicker">— {kicker}</span>
+        <span className="kicker">{kicker}</span>
       </div>
       <div className="col-span-12 lg:col-span-7">
         <h2
@@ -444,7 +445,7 @@ function Services() {
               Todo para tu <span className="display-italic">vista.</span>
             </>
           }
-          intro="Examen, lentes, armazones y mantenimiento — todo en un solo lugar y con buena atención."
+          intro="Examen, lentes, armazones y mantenimiento. Todo en un solo lugar y con buena atención."
         />
 
         <div className="mt-16 grid grid-cols-12 gap-x-6 gap-y-12 lg:gap-x-10">
@@ -762,7 +763,7 @@ function Reviews() {
               </blockquote>
               <figcaption className="mt-8 flex items-center justify-between border-t border-hairline pt-5">
                 <div>
-                  <p className="kicker">— {r.name}</p>
+                  <p className="kicker">{r.name}</p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     Google Reviews
                   </p>
@@ -908,87 +909,104 @@ function Visit() {
 }
 
 /* -------------------------------------------------------- FOOTER */
+function TikTokIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+      <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-1.85-2.48V9.74a5.66 5.66 0 1 0 4.94 5.61V8.9a7.34 7.34 0 0 0 4.3 1.38V7.19a4.28 4.28 0 0 1-3.24-1.37z" />
+    </svg>
+  );
+}
+
 function Footer() {
   return (
-    <footer className="bg-[var(--color-ink)] py-20 text-background">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="grid grid-cols-12 gap-6 border-b border-background/15 pb-16 lg:gap-10">
+    <footer className="bg-[var(--color-ink)] text-background">
+      <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10">
+        <div className="grid grid-cols-12 gap-10 border-b border-background/15 pb-14">
+          {/* Marca + CTA */}
           <div className="col-span-12 lg:col-span-6">
             <img
               src="/logo.jpg"
               alt="Óptica Martínez"
-              className="mb-7 h-16 w-16 rounded-full ring-1 ring-background/20"
+              className="mb-6 h-16 w-16 rounded-full ring-1 ring-background/20"
             />
             <p
               className="font-display tracking-[-0.03em]"
-              style={{
-                fontSize: "clamp(2.5rem, 6vw, 5rem)",
-                lineHeight: 0.95,
-                fontWeight: 400,
-              }}
+              style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", lineHeight: 0.98, fontWeight: 400 }}
             >
               Ver bien,
               <br />
               para <span className="display-italic">vivir mejor.</span>
             </p>
+            <a
+              href={wa("Hola, quiero agendar mi examen visual gratis 👓")}
+              target="_blank"
+              rel="noreferrer"
+              className="group mt-8 inline-flex items-center gap-3 rounded-full bg-background px-6 py-3.5 text-xs font-medium uppercase tracking-[0.16em] text-[var(--color-ink)] transition-all hover:bg-primary hover:text-background"
+            >
+              <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
+              Agenda por WhatsApp
+            </a>
           </div>
-          <div className="col-span-6 lg:col-span-2">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-background/50">
-              Ubicación
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-background/85">
+
+          {/* Visítanos */}
+          <div className="col-span-6 lg:col-span-3">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-background/50">Visítanos</p>
+            <p className="mt-5 text-sm leading-relaxed text-background/85">
               Plaza TOA
               <br />
-              Simón Bolívar
+              Simón Bolívar entre
               <br />
-              entre Lourdes y Catacocha
+              Lourdes y Catacocha
               <br />
               Loja, Ecuador
             </p>
           </div>
-          <div className="col-span-6 lg:col-span-2">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-background/50">
-              Contacto
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-background/85">
-              WhatsApp
-              <br />
-              +593 96 779 4351
-              <br />
-              <br />
-              Tel. 099 133 7101
-            </p>
-          </div>
-          <div className="col-span-12 lg:col-span-2">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-background/50">
-              Síguenos
-            </p>
-            <div className="mt-4 flex flex-col gap-2 text-sm">
+
+          {/* Contacto + redes */}
+          <div className="col-span-6 lg:col-span-3">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-background/50">Contacto</p>
+            <div className="mt-5 flex flex-col gap-3 text-sm">
+              <a
+                href={wa("Hola 👋, quiero información")}
+                target="_blank"
+                rel="noreferrer"
+                className="ul-link inline-flex items-center gap-2.5 text-background/85 hover:text-background"
+              >
+                <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
+                +593 96 779 4351
+              </a>
+              <a
+                href="tel:+593991337101"
+                className="ul-link inline-flex items-center gap-2.5 text-background/85 hover:text-background"
+              >
+                <Phone className="h-4 w-4" strokeWidth={1.5} />
+                099 133 7101
+              </a>
               <a
                 href="https://www.instagram.com/martinezoptometry/"
                 target="_blank"
                 rel="noreferrer"
-                className="ul-link inline-flex items-center gap-2 text-background/85 hover:text-background"
+                className="ul-link inline-flex items-center gap-2.5 text-background/85 hover:text-background"
               >
-                <Instagram className="h-3.5 w-3.5" strokeWidth={1.5} />
-                Instagram
+                <Instagram className="h-4 w-4" strokeWidth={1.5} />
+                @martinezoptometry
               </a>
               <a
                 href="https://www.tiktok.com/@optica.martinez.o"
                 target="_blank"
                 rel="noreferrer"
-                className="ul-link inline-flex items-center gap-2 text-background/85 hover:text-background"
+                className="ul-link inline-flex items-center gap-2.5 text-background/85 hover:text-background"
               >
-                <Sparkle className="h-3.5 w-3.5" strokeWidth={1.5} />
-                TikTok
+                <TikTokIcon className="h-4 w-4" />
+                @optica.martinez.o
               </a>
             </div>
           </div>
         </div>
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-background/40">
+
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-[10px] uppercase tracking-[0.22em] text-background/40">
           <span>© 2026 Óptica Martínez</span>
           <span>Loja · Ecuador</span>
-          <span>Hecho con cuidado.</span>
         </div>
       </div>
     </footer>
@@ -998,7 +1016,7 @@ function Footer() {
 function FloatingWhatsApp() {
   return (
     <a
-      href={WHATSAPP_URL}
+      href={wa("Hola 👋, quiero información sobre Óptica Martínez")}
       target="_blank"
       rel="noreferrer"
       className="group fixed bottom-6 right-6 z-40 inline-flex items-center gap-3 rounded-full bg-[var(--color-ink)] px-5 py-3 text-xs font-medium uppercase tracking-[0.14em] text-background shadow-[0_20px_40px_-20px_hsl(240_52%_16%/0.5)] transition-all hover:bg-primary"

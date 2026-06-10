@@ -38,7 +38,7 @@ export default function EyeChart() {
         </motion.div>
         <p className="mx-auto mt-14 max-w-md text-base leading-relaxed text-muted-foreground">
           Si lo de arriba se te hizo borroso al inicio, quizás es hora de una revisada.
-          El examen es gratis — agéndalo y ve la diferencia.
+          El examen es gratis, agéndalo y nota la diferencia.
         </p>
       </div>
     </section>

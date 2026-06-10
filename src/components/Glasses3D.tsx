@@ -5,8 +5,7 @@ import * as THREE from "three";
 
 function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
   const group = useRef<THREE.Group>(null);
-  const lidTop = useRef<THREE.Group>(null);
-  const lidBottom = useRef<THREE.Group>(null);
+  const lid = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const winkT0 = useRef(-10);
 
@@ -38,8 +37,8 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
     const c = t - winkT0.current;
     let v = 0;
     if (c >= 0 && c < 0.85) v = Math.sin((c / 0.85) * Math.PI); // 0 → 1 → 0 (lento)
-    if (lidTop.current) lidTop.current.scale.y = v;
-    if (lidBottom.current) lidBottom.current.scale.y = v;
+    // el lente se cierra: el párpado circular se aplasta/expande en Y (forma del lente)
+    if (lid.current) lid.current.scale.y = v;
   });
 
   const outerR = 0.92;
@@ -67,8 +66,8 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
 
   const lensGeo = useMemo(() => new THREE.SphereGeometry(innerR, 64, 64), []);
   const glintGeo = useMemo(() => new THREE.TorusGeometry(innerR * 0.5, 0.028, 10, 40, 1.4), []);
-  // Medio párpado (plano) — dos de estos cierran hacia el centro = guiño
-  const lidGeo = useMemo(() => new THREE.PlaneGeometry(innerR * 2.1, innerR), []);
+  // Párpado CIRCULAR (forma del lente) — se aplasta/expande en Y al guiñar
+  const lidGeo = useMemo(() => new THREE.CircleGeometry(innerR * 0.97, 48), []);
 
   const black = useMemo(
     () =>
@@ -116,14 +115,9 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
         </group>
       ))}
 
-      {/* Guiño del ojo izquierdo: párpado superior baja + inferior sube */}
-      <group position={[-lensOffset, 0, 0.16]}>
-        <group ref={lidTop} position={[0, innerR, 0]} scale={[1, 0, 1]}>
-          <mesh geometry={lidGeo} material={black} position={[0, -innerR / 2, 0]} />
-        </group>
-        <group ref={lidBottom} position={[0, -innerR, 0]} scale={[1, 0, 1]}>
-          <mesh geometry={lidGeo} material={black} position={[0, innerR / 2, 0]} />
-        </group>
+      {/* Guiño del ojo izquierdo: el lente se cierra (párpado circular) */}
+      <group ref={lid} position={[-lensOffset, 0, 0.16]} scale={[1, 0, 1]}>
+        <mesh geometry={lidGeo} material={black} />
       </group>
 
       {/* Puente */}
