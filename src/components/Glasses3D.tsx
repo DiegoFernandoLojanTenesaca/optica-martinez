@@ -3,11 +3,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
 
-function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
+function Glasses() {
   const group = useRef<THREE.Group>(null);
-  const lid = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
-  const winkT0 = useRef(-10);
 
   // Seguimiento del mouse en TODA la página
   useEffect(() => {
@@ -29,16 +27,6 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
       group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 7, delta);
       group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 7, delta);
     }
-    // Guiño AL CLICK: los párpados cierran hacia el centro (no "baja una cosa")
-    if (winkReq.current) {
-      winkReq.current = false;
-      winkT0.current = t;
-    }
-    const c = t - winkT0.current;
-    let v = 0;
-    if (c >= 0 && c < 0.5) v = Math.sin((c / 0.5) * Math.PI); // parpadeo
-    // guiño: un párpado mate cae sobre el ojo izquierdo (el aro NO se deforma)
-    if (lid.current) lid.current.scale.y = v;
   });
 
   const outerR = 0.92;
@@ -65,8 +53,8 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
   }, []);
 
   const lensGeo = useMemo(() => new THREE.SphereGeometry(innerR, 64, 64), []);
-  const glintGeo = useMemo(() => new THREE.TorusGeometry(innerR * 0.5, 0.028, 10, 40, 1.4), []);
-  const lidGeo = useMemo(() => new THREE.CircleGeometry(innerR * 0.99, 48), []);
+  // Arco del lente, más grueso y marcado (como las líneas del logo)
+  const glintGeo = useMemo(() => new THREE.TorusGeometry(innerR * 0.52, 0.05, 14, 56, 1.5), []);
 
   const black = useMemo(
     () =>
@@ -98,12 +86,11 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
       }),
     []
   );
+  // detalle del lente en NEGRO (como el reflejo dibujado del logo)
   const glint = useMemo(
-    () => new THREE.MeshBasicMaterial({ color: new THREE.Color("#ffffff"), transparent: true, opacity: 0.7 }),
+    () => new THREE.MeshBasicMaterial({ color: new THREE.Color("#0a0a0c") }),
     []
   );
-  // párpado MATE (sin reflejos) para que no parezca una bola
-  const lidMat = useMemo(() => new THREE.MeshBasicMaterial({ color: new THREE.Color("#0a0a0c") }), []);
 
   return (
     <group ref={group} scale={0.72}>
@@ -115,11 +102,6 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
           <mesh geometry={glintGeo} material={glint} position={[-0.12, 0.18, 0.13]} rotation={[0, 0, 1.95]} />
         </group>
       ))}
-
-      {/* Guiño: párpado mate que cae desde arriba sobre el ojo izquierdo (aro fijo) */}
-      <group ref={lid} position={[-lensOffset, innerR, 0.17]} scale={[1, 0, 1]}>
-        <mesh geometry={lidGeo} material={lidMat} position={[0, -innerR, 0]} />
-      </group>
 
       {/* Puente */}
       <mesh material={black} position={[0, 0.16, 0]}>
@@ -158,16 +140,12 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
 }
 
 export default function Glasses3D() {
-  const winkReq = useRef(false);
   return (
     <Canvas
       camera={{ position: [0, 0.05, 5.9], fov: 32 }}
       dpr={[1, 1.8]}
       gl={{ antialias: true, alpha: true }}
       style={{ background: "transparent" }}
-      onPointerDown={() => {
-        winkReq.current = true;
-      }}
     >
       <ambientLight intensity={0.5} />
       <directionalLight position={[4, 6, 5]} intensity={1.5} />
@@ -175,7 +153,7 @@ export default function Glasses3D() {
       <directionalLight position={[0, -2, -6]} intensity={0.6} color="#3A35D6" />
       <Suspense fallback={null}>
         <Float speed={1.1} rotationIntensity={0.04} floatIntensity={0.28}>
-          <Glasses winkReq={winkReq} />
+          <Glasses />
         </Float>
         <Environment preset="studio" />
         <ContactShadows position={[0, -1.55, 0]} opacity={0.3} scale={9} blur={2.8} far={3.5} color="#14143E" />
