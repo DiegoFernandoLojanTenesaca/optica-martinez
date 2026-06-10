@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
   const group = useRef<THREE.Group>(null);
-  const lid = useRef<THREE.Group>(null);
+  const leftEye = useRef<THREE.Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const winkT0 = useRef(-10);
 
@@ -36,9 +36,9 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
     }
     const c = t - winkT0.current;
     let v = 0;
-    if (c >= 0 && c < 0.85) v = Math.sin((c / 0.85) * Math.PI); // 0 → 1 → 0 (lento)
-    // el lente se cierra: el párpado circular se aplasta/expande en Y (forma del lente)
-    if (lid.current) lid.current.scale.y = v;
+    if (c >= 0 && c < 0.5) v = Math.sin((c / 0.5) * Math.PI); // parpadeo
+    // guiño: el ojo IZQUIERDO se cierra (se aplasta en Y) y vuelve a abrir
+    if (leftEye.current) leftEye.current.scale.y = 1 - v * 0.86;
   });
 
   const outerR = 0.92;
@@ -66,8 +66,6 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
 
   const lensGeo = useMemo(() => new THREE.SphereGeometry(innerR, 64, 64), []);
   const glintGeo = useMemo(() => new THREE.TorusGeometry(innerR * 0.5, 0.028, 10, 40, 1.4), []);
-  // Párpado CIRCULAR (forma del lente) — se aplasta/expande en Y al guiñar
-  const lidGeo = useMemo(() => new THREE.CircleGeometry(innerR * 0.97, 48), []);
 
   const black = useMemo(
     () =>
@@ -108,17 +106,14 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
     <group ref={group} scale={0.72}>
       {/* Ojos: aro + lente + reflejo */}
       {[-1, 1].map((s) => (
-        <group key={s} position={[s * lensOffset, 0, 0]}>
+        <group key={s} ref={s === -1 ? leftEye : undefined} position={[s * lensOffset, 0, 0]}>
           <mesh geometry={ringGeo} material={black} />
           <mesh geometry={lensGeo} material={glass} scale={[1, 1, 0.16]} />
           <mesh geometry={glintGeo} material={glint} position={[-0.12, 0.18, 0.13]} rotation={[0, 0, 1.95]} />
         </group>
       ))}
 
-      {/* Guiño del ojo izquierdo: el párpado CAE desde arriba (como un ojo real) */}
-      <group ref={lid} position={[-lensOffset, innerR, 0.16]} scale={[1, 0, 1]}>
-        <mesh geometry={lidGeo} material={black} position={[0, -innerR, 0]} />
-      </group>
+      {/* El guiño se hace escalando el ojo izquierdo en Y (ver useFrame) */}
 
       {/* Puente */}
       <mesh material={black} position={[0, 0.16, 0]}>
