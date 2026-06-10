@@ -23,6 +23,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import EyeChart from "@/components/EyeChart";
 import BrandStrip from "@/components/BrandStrip";
+import Reels from "@/components/Reels";
 import { getReviews } from "@/lib/reviews";
 
 const Glasses3D = lazy(() => import("@/components/Glasses3D"));
@@ -1111,6 +1112,7 @@ function Landing() {
         <BrandStrip />
         <Services />
         <Collection />
+        <Reels />
         <EyeChart />
         <About />
         <Reviews />
