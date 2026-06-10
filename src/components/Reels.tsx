@@ -5,10 +5,26 @@ import { ArrowUpRight } from "lucide-react";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const REELS = [
-  { src: "/videos/reel1.mp4", poster: "/videos/reel1.jpg", title: "Línea Harley-Davidson" },
-  { src: "/videos/reel2.mp4", poster: "/videos/reel2.jpg", title: "Armazones de acetato" },
-  { src: "/videos/reel3.mp4", poster: "/videos/reel3.jpg", title: "Monturas metálicas" },
-  { src: "/videos/reel4.mp4", poster: "/videos/reel4.jpg", title: "Lentes Transitions" },
+  {
+    src: "/videos/reel1.mp4",
+    poster: "/videos/reel1.jpg",
+    title: "Línea Harley-Davidson",
+  },
+  {
+    src: "/videos/reel2.mp4",
+    poster: "/videos/reel2.jpg",
+    title: "Armazones de acetato",
+  },
+  {
+    src: "/videos/reel3.mp4",
+    poster: "/videos/reel3.jpg",
+    title: "Monturas metálicas",
+  },
+  {
+    src: "/videos/reel4.mp4",
+    poster: "/videos/reel4.jpg",
+    title: "Lentes Transitions",
+  },
 ];
 
 function Reel({ reel, i }: { reel: (typeof REELS)[number]; i: number }) {
@@ -23,7 +39,7 @@ function Reel({ reel, i }: { reel: (typeof REELS)[number]; i: number }) {
         if (entry.isIntersecting) v.play().catch(() => {});
         else v.pause();
       },
-      { threshold: 0.35 }
+      { threshold: 0.35 },
     );
     io.observe(v);
     return () => io.disconnect();
@@ -48,7 +64,10 @@ function Reel({ reel, i }: { reel: (typeof REELS)[number]; i: number }) {
         className="aspect-[9/16] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
       />
       <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-        <span className="font-display text-sm text-white" style={{ fontWeight: 400 }}>
+        <span
+          className="font-display text-sm text-white"
+          style={{ fontWeight: 400 }}
+        >
           {reel.title}
         </span>
       </figcaption>
@@ -71,7 +90,11 @@ export default function Reels() {
             <span className="kicker">En acción</span>
             <h2
               className="mt-3 font-display tracking-[-0.03em] ink"
-              style={{ fontSize: "clamp(2.25rem, 5vw, 4.25rem)", lineHeight: 1, fontWeight: 400 }}
+              style={{
+                fontSize: "clamp(2.25rem, 5vw, 4.25rem)",
+                lineHeight: 1,
+                fontWeight: 400,
+              }}
             >
               Míranos <span className="display-italic">en video.</span>
             </h2>

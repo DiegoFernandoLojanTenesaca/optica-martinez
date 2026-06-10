@@ -78,5 +78,5 @@ export const getReviews = createServerFn({ method: "GET" }).handler(
     } catch {
       return { reviews: FALLBACK, rating: 5.0, total: 25, live: false };
     }
-  }
+  },
 );

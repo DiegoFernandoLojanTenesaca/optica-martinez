@@ -54,14 +54,17 @@ export const Route = createFileRoute("/")({
 
 const WA_NUMBER = "593967794351";
 // Mensajes precargados según el contexto del botón
-const wa = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+const wa = (msg: string) =>
+  `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WHATSAPP_URL = wa("Hola, quiero agendar mi examen visual gratis 👓");
 
 // Scroll suave SIN dejar el #hash en la URL
 function scrollToId(e: MouseEvent<HTMLAnchorElement>, href: string) {
   if (!href.startsWith("#")) return;
   e.preventDefault();
-  document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  document
+    .querySelector(href)
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 // Datos estructurados para Google (negocio local / óptica)
@@ -137,7 +140,11 @@ function Header() {
       }`}
     >
       <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6 px-6 py-5 lg:px-10">
-        <a href="#top" onClick={(e) => scrollToId(e, "#top")} className="flex items-center gap-3">
+        <a
+          href="#top"
+          onClick={(e) => scrollToId(e, "#top")}
+          className="flex items-center gap-3"
+        >
           <motion.img
             src="/logo.jpg"
             alt="Óptica Martínez Optometría"
@@ -146,7 +153,12 @@ function Header() {
             transition={{
               opacity: { duration: 0.8, ease: EASE, delay: 0.1 },
               scale: { duration: 0.8, ease: EASE, delay: 0.1 },
-              scaleY: { duration: 5, times: [0, 0.92, 0.96, 1], repeat: Infinity, ease: "easeInOut" },
+              scaleY: {
+                duration: 5,
+                times: [0, 0.92, 0.96, 1],
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
             }}
             whileHover={{ scale: 1.08 }}
             className="h-11 w-11 rounded-full"
@@ -270,18 +282,38 @@ function Hero() {
               }}
             >
               <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
-                <motion.span custom={0} variants={heroLine} initial="hidden" animate="show" className="block">
+                <motion.span
+                  custom={0}
+                  variants={heroLine}
+                  initial="hidden"
+                  animate="show"
+                  className="block"
+                >
                   Mira bien,
                 </motion.span>
               </span>
               <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
-                <motion.span custom={1} variants={heroLine} initial="hidden" animate="show" className="block">
+                <motion.span
+                  custom={1}
+                  variants={heroLine}
+                  initial="hidden"
+                  animate="show"
+                  className="block"
+                >
                   luce
                 </motion.span>
               </span>
               <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
-                <motion.span custom={2} variants={heroLine} initial="hidden" animate="show" className="block">
-                  <span className="display-italic text-primary">increíble.</span>
+                <motion.span
+                  custom={2}
+                  variants={heroLine}
+                  initial="hidden"
+                  animate="show"
+                  className="block"
+                >
+                  <span className="display-italic text-primary">
+                    increíble.
+                  </span>
                 </motion.span>
               </span>
             </h1>
@@ -520,7 +552,10 @@ function Services() {
                   /{String(i + 1).padStart(2, "0")}
                 </span>
               </div>
-              <h3 className="mt-8 font-display text-2xl tracking-tight ink" style={{ fontWeight: 400 }}>
+              <h3
+                className="mt-8 font-display text-2xl tracking-tight ink"
+                style={{ fontWeight: 400 }}
+              >
                 {s.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -536,12 +571,42 @@ function Services() {
 
 /* -------------------------------------------------------- COLLECTION */
 const collection = [
-  { name: "Aviator Heritage", brand: "MAX&Co", tone: "from-[#14143E] to-[#322EC0]", h: "h-[520px]" },
-  { name: "Round Atelier", brand: "MAX&Co", tone: "from-[#EEF0FB] to-[#cbceef]", h: "h-[380px]" },
-  { name: "Cat Eye Editorial", brand: "MAX&Co", tone: "from-[#322EC0] to-[#24228A]", h: "h-[440px]" },
-  { name: "Square Architect", brand: "MAX&Co", tone: "from-[#1a1a30] to-[#14143E]", h: "h-[500px]" },
-  { name: "Wire Minimalist", brand: "MAX&Co", tone: "from-[#cbceef] to-[#EEF0FB]", h: "h-[360px]" },
-  { name: "Acetate Maison", brand: "MAX&Co", tone: "from-[#24228A] to-[#14143E]", h: "h-[480px]" },
+  {
+    name: "Aviator Heritage",
+    brand: "MAX&Co",
+    tone: "from-[#14143E] to-[#322EC0]",
+    h: "h-[520px]",
+  },
+  {
+    name: "Round Atelier",
+    brand: "MAX&Co",
+    tone: "from-[#EEF0FB] to-[#cbceef]",
+    h: "h-[380px]",
+  },
+  {
+    name: "Cat Eye Editorial",
+    brand: "MAX&Co",
+    tone: "from-[#322EC0] to-[#24228A]",
+    h: "h-[440px]",
+  },
+  {
+    name: "Square Architect",
+    brand: "MAX&Co",
+    tone: "from-[#1a1a30] to-[#14143E]",
+    h: "h-[500px]",
+  },
+  {
+    name: "Wire Minimalist",
+    brand: "MAX&Co",
+    tone: "from-[#cbceef] to-[#EEF0FB]",
+    h: "h-[360px]",
+  },
+  {
+    name: "Acetate Maison",
+    brand: "MAX&Co",
+    tone: "from-[#24228A] to-[#14143E]",
+    h: "h-[480px]",
+  },
 ];
 
 function GlassesSilhouette({ light = false }: { light?: boolean }) {
@@ -550,14 +615,35 @@ function GlassesSilhouette({ light = false }: { light?: boolean }) {
     <svg viewBox="0 0 220 90" className="w-3/5" fill="none">
       <circle cx="60" cy="45" r="32" stroke={stroke} strokeWidth="1.5" />
       <circle cx="160" cy="45" r="32" stroke={stroke} strokeWidth="1.5" />
-      <path d="M92 42 Q110 32 128 42" stroke={stroke} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M28 38 L6 32" stroke={stroke} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M192 38 L214 32" stroke={stroke} strokeWidth="1.5" strokeLinecap="round" />
+      <path
+        d="M92 42 Q110 32 128 42"
+        stroke={stroke}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M28 38 L6 32"
+        stroke={stroke}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M192 38 L214 32"
+        stroke={stroke}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
 
-function CollectionCard({ item, i }: { item: typeof collection[0]; i: number }) {
+function CollectionCard({
+  item,
+  i,
+}: {
+  item: (typeof collection)[0];
+  i: number;
+}) {
   const [t, setT] = useState({ x: 0, y: 0 });
   const light = i % 2 === 0;
   return (
@@ -573,7 +659,9 @@ function CollectionCard({ item, i }: { item: typeof collection[0]; i: number }) 
         setT({ x: py * -6, y: px * 8 });
       }}
       onMouseLeave={() => setT({ x: 0, y: 0 })}
-      style={{ transform: `perspective(1200px) rotateX(${t.x}deg) rotateY(${t.y}deg)` }}
+      style={{
+        transform: `perspective(1200px) rotateX(${t.x}deg) rotateY(${t.y}deg)`,
+      }}
       className="group [transform-style:preserve-3d] transition-transform duration-300 ease-out"
     >
       <div
@@ -591,7 +679,10 @@ function CollectionCard({ item, i }: { item: typeof collection[0]; i: number }) 
       <figcaption className="mt-5 flex items-baseline justify-between border-t border-hairline pt-4">
         <div>
           <p className="kicker">{item.brand}</p>
-          <h3 className="mt-1 font-display text-xl ink" style={{ fontWeight: 400 }}>
+          <h3
+            className="mt-1 font-display text-xl ink"
+            style={{ fontWeight: 400 }}
+          >
             {item.name}
           </h3>
         </div>
@@ -606,14 +697,18 @@ function CollectionCard({ item, i }: { item: typeof collection[0]; i: number }) 
 
 function Collection() {
   return (
-    <section id="coleccion" className="relative overflow-hidden bg-sand py-24 lg:py-36 grain">
+    <section
+      id="coleccion"
+      className="relative overflow-hidden bg-sand py-24 lg:py-36 grain"
+    >
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeader
           n="02"
           kicker="Colección"
           title={
             <>
-              Armazones para <span className="display-italic">cada estilo.</span>
+              Armazones para{" "}
+              <span className="display-italic">cada estilo.</span>
             </>
           }
           intro="Marcas como MAX&Co y modelos para todos los gustos. Pásate a probártelos sin compromiso."
@@ -685,7 +780,10 @@ function About() {
                 "Te asesoramos sin presionarte a comprar",
                 "Garantía en lunas y armazones",
               ].map((p) => (
-                <div key={p} className="flex items-start gap-3 border-t border-hairline pt-4">
+                <div
+                  key={p}
+                  className="flex items-start gap-3 border-t border-hairline pt-4"
+                >
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                   <span className="text-sm leading-relaxed ink">{p}</span>
                 </div>
@@ -701,7 +799,11 @@ function About() {
             className="col-span-12 flex flex-col gap-px bg-hairline lg:col-span-5"
           >
             {[
-              { name: "Lic. Luis Martínez, Mgtr.", role: "Optómetra · Fundador", n: "01" },
+              {
+                name: "Lic. Luis Martínez, Mgtr.",
+                role: "Optómetra · Fundador",
+                n: "01",
+              },
             ].map((m) => (
               <div
                 key={m.name}
@@ -722,9 +824,7 @@ function About() {
             ))}
             <div className="flex items-end justify-between bg-[var(--color-ink)] p-8 text-background">
               <div>
-                <span
-                  className="font-display text-xs uppercase tracking-[0.18em] text-background/60"
-                >
+                <span className="font-display text-xs uppercase tracking-[0.18em] text-background/60">
                   Confianza
                 </span>
                 <p
@@ -737,7 +837,9 @@ function About() {
                   calificación promedio en Google Reviews
                 </p>
               </div>
-              <span className="font-display text-xs text-background/40">/ 03</span>
+              <span className="font-display text-xs text-background/40">
+                / 03
+              </span>
             </div>
           </motion.div>
         </div>
@@ -784,11 +886,19 @@ function Reviews() {
   const { data } = useQuery({
     queryKey: ["reviews"],
     queryFn: () => getReviews(),
-    initialData: { reviews: FALLBACK_REVIEWS, rating: 5.0, total: 25, live: false },
+    initialData: {
+      reviews: FALLBACK_REVIEWS,
+      rating: 5.0,
+      total: 25,
+      live: false,
+    },
     staleTime: 1000 * 60 * 30,
   });
   return (
-    <section id="resenas" className="bg-sand py-24 lg:py-36 relative overflow-hidden grain">
+    <section
+      id="resenas"
+      className="bg-sand py-24 lg:py-36 relative overflow-hidden grain"
+    >
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeader
           n="04"
@@ -896,12 +1006,20 @@ function Visit() {
                 <div key={c.k} className="bg-background p-7">
                   <span className="kicker">{c.k}</span>
                   <div className="mt-3 flex items-start gap-4">
-                    <c.icon className="mt-1 h-4 w-4 shrink-0 text-primary" strokeWidth={1.25} />
+                    <c.icon
+                      className="mt-1 h-4 w-4 shrink-0 text-primary"
+                      strokeWidth={1.25}
+                    />
                     <div>
-                      <p className="font-display text-xl ink" style={{ fontWeight: 400 }}>
+                      <p
+                        className="font-display text-xl ink"
+                        style={{ fontWeight: 400 }}
+                      >
                         {c.t}
                       </p>
-                      <p className="mt-1 text-sm text-muted-foreground">{c.d}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {c.d}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -983,7 +1101,12 @@ function Visit() {
 /* -------------------------------------------------------- FOOTER */
 function TikTokIcon({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="currentColor"
+      aria-hidden="true"
+    >
       <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-1.85-2.48V9.74a5.66 5.66 0 1 0 4.94 5.61V8.9a7.34 7.34 0 0 0 4.3 1.38V7.19a4.28 4.28 0 0 1-3.24-1.37z" />
     </svg>
   );
@@ -1003,7 +1126,11 @@ function Footer() {
             />
             <p
               className="font-display tracking-[-0.03em]"
-              style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)", lineHeight: 0.98, fontWeight: 400 }}
+              style={{
+                fontSize: "clamp(2.25rem, 5vw, 4rem)",
+                lineHeight: 0.98,
+                fontWeight: 400,
+              }}
             >
               Ver bien,
               <br />
@@ -1022,7 +1149,9 @@ function Footer() {
 
           {/* Visítanos */}
           <div className="col-span-6 lg:col-span-3">
-            <p className="text-[10px] uppercase tracking-[0.22em] text-background/50">Visítanos</p>
+            <p className="text-[10px] uppercase tracking-[0.22em] text-background/50">
+              Visítanos
+            </p>
             <p className="mt-5 text-sm leading-relaxed text-background/85">
               Plaza TOA
               <br />
@@ -1036,7 +1165,9 @@ function Footer() {
 
           {/* Contacto + redes */}
           <div className="col-span-6 lg:col-span-3">
-            <p className="text-[10px] uppercase tracking-[0.22em] text-background/50">Contacto</p>
+            <p className="text-[10px] uppercase tracking-[0.22em] text-background/50">
+              Contacto
+            </p>
             <div className="mt-5 flex flex-col gap-3 text-sm">
               <a
                 href={wa("Hola 👋, quiero información")}
@@ -1103,7 +1234,10 @@ function FloatingWhatsApp() {
 function Landing() {
   return (
     <div className="min-h-screen bg-background">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA) }}
+      />
       <Header />
       <main>
         <Hero />

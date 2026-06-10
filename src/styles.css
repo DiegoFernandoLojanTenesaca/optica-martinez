@@ -37,17 +37,18 @@
   --color-ring: var(--ring);
 
   --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
-  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans:
+    "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 :root {
   --radius: 0.5rem;
 
   /* Brand palette — white + indigo blue (rótulo "Martinez Optometry") */
-  --background: hsl(240 33% 99%);           /* #FBFBFE blanco frío */
+  --background: hsl(240 33% 99%); /* #FBFBFE blanco frío */
   --surface: hsl(240 33% 99%);
-  --sand: hsl(240 40% 97%);                 /* #F2F3FB azul muy claro */
-  --ink: hsl(240 52% 16%);                  /* #14143E azul-tinta */
+  --sand: hsl(240 40% 97%); /* #F2F3FB azul muy claro */
+  --ink: hsl(240 52% 16%); /* #14143E azul-tinta */
 
   --foreground: hsl(240 52% 16%);
   --card: hsl(240 33% 99%);
@@ -55,30 +56,35 @@
   --popover: hsl(240 33% 99%);
   --popover-foreground: hsl(240 52% 16%);
 
-  --primary: hsl(243 60% 47%);              /* #322EC0 índigo de marca */
+  --primary: hsl(243 60% 47%); /* #322EC0 índigo de marca */
   --primary-foreground: hsl(240 33% 99%);
-  --primary-deep: hsl(243 58% 34%);         /* #24228A */
+  --primary-deep: hsl(243 58% 34%); /* #24228A */
 
   --secondary: hsl(240 40% 97%);
   --secondary-foreground: hsl(240 52% 16%);
   --muted: hsl(240 33% 96%);
-  --muted-foreground: hsl(240 12% 38%);     /* gris azulado */
+  --muted-foreground: hsl(240 12% 38%); /* gris azulado */
   --accent: hsl(243 55% 93%);
   --accent-foreground: hsl(243 58% 34%);
 
   --destructive: hsl(0 70% 45%);
   --destructive-foreground: hsl(240 33% 99%);
 
-  --border: hsl(240 52% 16% / 0.1);         /* hairline = ink @ 10% */
+  --border: hsl(240 52% 16% / 0.1); /* hairline = ink @ 10% */
   --hairline: hsl(240 52% 16% / 0.1);
   --input: hsl(240 52% 16% / 0.15);
   --ring: hsl(243 60% 47%);
 }
 
 @layer base {
-  * { border-color: var(--color-hairline); }
+  * {
+    border-color: var(--color-hairline);
+  }
 
-  html { scroll-behavior: smooth; overflow-x: clip; }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
 
   body {
     overflow-x: clip;
@@ -89,26 +95,43 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     /* subtle grain */
-    background-image:
-      radial-gradient(hsl(240 52% 16% / 0.025) 1px, transparent 1px);
+    background-image: radial-gradient(
+      hsl(240 52% 16% / 0.025) 1px,
+      transparent 1px
+    );
     background-size: 3px 3px;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     color: var(--color-ink);
     font-optical-sizing: auto;
-    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-variation-settings:
+      "opsz" 144,
+      "SOFT" 50;
     letter-spacing: -0.025em;
     line-height: 1;
   }
 
-  ::selection { background: var(--color-primary); color: var(--color-primary-foreground); }
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
 }
 
 @layer utilities {
-  .font-display { font-family: var(--font-display); font-variation-settings: "opsz" 144, "SOFT" 50; }
-  .font-sans { font-family: var(--font-sans); }
+  .font-display {
+    font-family: var(--font-display);
+    font-variation-settings:
+      "opsz" 144,
+      "SOFT" 50;
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
 
   .kicker {
     font-family: var(--font-sans);
@@ -119,28 +142,52 @@
     color: var(--color-primary);
   }
 
-  .ink { color: var(--color-ink); }
-  .bg-bone { background-color: var(--color-background); }
-  .bg-sand { background-color: var(--color-sand); }
+  .ink {
+    color: var(--color-ink);
+  }
+  .bg-bone {
+    background-color: var(--color-background);
+  }
+  .bg-sand {
+    background-color: var(--color-sand);
+  }
 
-  .hairline { border-color: var(--color-hairline); }
-  .hairline-t { border-top: 1px solid var(--color-hairline); }
-  .hairline-b { border-bottom: 1px solid var(--color-hairline); }
+  .hairline {
+    border-color: var(--color-hairline);
+  }
+  .hairline-t {
+    border-top: 1px solid var(--color-hairline);
+  }
+  .hairline-b {
+    border-bottom: 1px solid var(--color-hairline);
+  }
 
   .grain::before {
     content: "";
-    position: absolute; inset: 0;
+    position: absolute;
+    inset: 0;
     pointer-events: none;
-    background-image:
-      radial-gradient(hsl(240 52% 16% / 0.04) 1px, transparent 1px);
+    background-image: radial-gradient(
+      hsl(240 52% 16% / 0.04) 1px,
+      transparent 1px
+    );
     background-size: 3px 3px;
     mix-blend-mode: multiply;
   }
 
-  .display-italic { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100; }
+  .display-italic {
+    font-style: italic;
+    font-variation-settings:
+      "opsz" 144,
+      "SOFT" 100;
+  }
 
-  .text-balance { text-wrap: balance; }
-  .text-pretty  { text-wrap: pretty; }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
 
   /* Animated underline link */
   .ul-link {
@@ -149,28 +196,53 @@
   }
   .ul-link::after {
     content: "";
-    position: absolute; left: 0; bottom: -2px;
-    width: 100%; height: 1px;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
     background: currentColor;
-    transform: scaleX(0); transform-origin: right;
+    transform: scaleX(0);
+    transform-origin: right;
     transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .ul-link:hover::after { transform: scaleX(1); transform-origin: left; }
+  .ul-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 
   @keyframes idle-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
-  .animate-float { animation: idle-float 7s ease-in-out infinite; }
+  .animate-float {
+    animation: idle-float 7s ease-in-out infinite;
+  }
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
   }
-  .animate-marquee { animation: marquee 30s linear infinite; }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-float { animation: none; }
-    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    .animate-float {
+      animation: none;
+    }
+    * {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 }

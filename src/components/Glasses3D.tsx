@@ -24,8 +24,18 @@ function Glasses() {
       const targetY = idleY + mouse.current.x * 0.4;
       const targetX = -mouse.current.y * 0.2;
       // damp = suavizado fluido e independiente de los FPS
-      group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 7, delta);
-      group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 7, delta);
+      group.current.rotation.y = THREE.MathUtils.damp(
+        group.current.rotation.y,
+        targetY,
+        7,
+        delta,
+      );
+      group.current.rotation.x = THREE.MathUtils.damp(
+        group.current.rotation.x,
+        targetX,
+        7,
+        delta,
+      );
     }
   });
 
@@ -54,7 +64,10 @@ function Glasses() {
 
   const lensGeo = useMemo(() => new THREE.SphereGeometry(innerR, 64, 64), []);
   // Arco del lente, más grueso y marcado (como las líneas del logo)
-  const glintGeo = useMemo(() => new THREE.TorusGeometry(innerR * 0.52, 0.05, 14, 56, 1.5), []);
+  const glintGeo = useMemo(
+    () => new THREE.TorusGeometry(innerR * 0.52, 0.05, 14, 56, 1.5),
+    [],
+  );
 
   const black = useMemo(
     () =>
@@ -66,7 +79,7 @@ function Glasses() {
         clearcoatRoughness: 0.08,
         envMapIntensity: 1.0,
       }),
-    []
+    [],
   );
   const glass = useMemo(
     () =>
@@ -84,12 +97,12 @@ function Glasses() {
         attenuationDistance: 3,
         envMapIntensity: 1.2,
       }),
-    []
+    [],
   );
   // detalle del lente en NEGRO (como el reflejo dibujado del logo)
   const glint = useMemo(
     () => new THREE.MeshBasicMaterial({ color: new THREE.Color("#0a0a0c") }),
-    []
+    [],
   );
 
   return (
@@ -99,7 +112,12 @@ function Glasses() {
         <group key={s} position={[s * lensOffset, 0, 0]}>
           <mesh geometry={ringGeo} material={black} />
           <mesh geometry={lensGeo} material={glass} scale={[1, 1, 0.09]} />
-          <mesh geometry={glintGeo} material={glint} position={[-0.12, 0.18, 0.13]} rotation={[0, 0, 1.95]} />
+          <mesh
+            geometry={glintGeo}
+            material={glint}
+            position={[-0.12, 0.18, 0.13]}
+            rotation={[0, 0, 1.95]}
+          />
         </group>
       ))}
 
@@ -114,7 +132,11 @@ function Glasses() {
 
       {/* Plaquetas de nariz */}
       {[-1, 1].map((s) => (
-        <mesh key={`nose-${s}`} material={black} position={[s * 0.26, -0.1, 0.1]}>
+        <mesh
+          key={`nose-${s}`}
+          material={black}
+          position={[s * 0.26, -0.1, 0.1]}
+        >
           <capsuleGeometry args={[0.028, 0.16, 4, 8]} />
         </mesh>
       ))}
@@ -129,11 +151,19 @@ function Glasses() {
               <sphereGeometry args={[0.11, 20, 20]} />
             </mesh>
             {/* patilla: nace pegada al marco y va recta hacia atrás */}
-            <mesh material={black} position={[s * 0.07, 0, -0.64]} rotation={[0, s * 0.05, 0]}>
+            <mesh
+              material={black}
+              position={[s * 0.07, 0, -0.64]}
+              rotation={[0, s * 0.05, 0]}
+            >
               <boxGeometry args={[0.075, 0.085, 1.6]} />
             </mesh>
             {/* terminal (codo) que baja detrás de la oreja */}
-            <mesh material={black} position={[s * 0.12, -0.14, -1.4]} rotation={[0.5, s * 0.05, 0]}>
+            <mesh
+              material={black}
+              position={[s * 0.12, -0.14, -1.4]}
+              rotation={[0.5, s * 0.05, 0]}
+            >
               <boxGeometry args={[0.07, 0.08, 0.42]} />
             </mesh>
           </group>
@@ -154,13 +184,24 @@ export default function Glasses3D() {
       <ambientLight intensity={0.5} />
       <directionalLight position={[4, 6, 5]} intensity={1.5} />
       <directionalLight position={[-5, 1, 2]} intensity={0.5} />
-      <directionalLight position={[0, -2, -6]} intensity={0.6} color="#3A35D6" />
+      <directionalLight
+        position={[0, -2, -6]}
+        intensity={0.6}
+        color="#3A35D6"
+      />
       <Suspense fallback={null}>
         <Float speed={1.1} rotationIntensity={0.04} floatIntensity={0.28}>
           <Glasses />
         </Float>
         <Environment preset="studio" />
-        <ContactShadows position={[0, -1.55, 0]} opacity={0.3} scale={9} blur={2.8} far={3.5} color="#14143E" />
+        <ContactShadows
+          position={[0, -1.55, 0]}
+          opacity={0.3}
+          scale={9}
+          blur={2.8}
+          far={3.5}
+          color="#14143E"
+        />
       </Suspense>
     </Canvas>
   );

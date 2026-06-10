@@ -16,11 +16,18 @@ export default function EyeChart() {
     target: ref,
     offset: ["start 0.85", "center 0.55"],
   });
-  const filter = useTransform(scrollYProgress, [0, 1], ["blur(14px)", "blur(0px)"]);
+  const filter = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["blur(14px)", "blur(0px)"],
+  );
   const opacity = useTransform(scrollYProgress, [0, 1], [0.35, 1]);
 
   return (
-    <section ref={ref} className="border-y border-hairline bg-background py-24 lg:py-32">
+    <section
+      ref={ref}
+      className="border-y border-hairline bg-background py-24 lg:py-32"
+    >
       <div className="mx-auto max-w-[820px] px-6 text-center">
         <span className="kicker">Así de claro quieres ver</span>
         <motion.div
@@ -30,15 +37,20 @@ export default function EyeChart() {
           {LINES.map((l, i) => (
             <span
               key={i}
-              style={{ fontSize: l.size, lineHeight: 1, letterSpacing: "0.22em", fontWeight: 500 }}
+              style={{
+                fontSize: l.size,
+                lineHeight: 1,
+                letterSpacing: "0.22em",
+                fontWeight: 500,
+              }}
             >
               {l.text}
             </span>
           ))}
         </motion.div>
         <p className="mx-auto mt-14 max-w-md text-base leading-relaxed text-muted-foreground">
-          Si lo de arriba se te hizo borroso al inicio, quizás es hora de una revisada.
-          El examen es gratis, agéndalo y nota la diferencia.
+          Si lo de arriba se te hizo borroso al inicio, quizás es hora de una
+          revisada. El examen es gratis, agéndalo y nota la diferencia.
         </p>
       </div>
     </section>
