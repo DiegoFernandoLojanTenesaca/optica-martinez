@@ -93,7 +93,7 @@ public/               # logo, favicon, og-image, videos
 
 **Óptica Martínez** · Plaza TOA, Simón Bolívar entre Lourdes y Catacocha, Loja, Ecuador
 Lun–Vie 9:30–20:30 · Sáb 10:00–18:30 · Dom cerrado
-WhatsApp +593 96 779 4351 · Tel. +593 99 133 7101
+WhatsApp / Tel. +593 99 133 7101
 
 ---
 

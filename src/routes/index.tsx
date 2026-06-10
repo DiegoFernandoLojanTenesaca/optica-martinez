@@ -52,7 +52,7 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const WA_NUMBER = "593967794351";
+const WA_NUMBER = "593991337101";
 // Mensajes precargados según el contexto del botón
 const wa = (msg: string) =>
   `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -73,7 +73,7 @@ const SCHEMA = {
   "@type": "Optician",
   name: "Óptica Martínez",
   image: "/og-image.png",
-  telephone: "+593967794351",
+  telephone: "+593991337101",
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
@@ -999,8 +999,8 @@ function Visit() {
                 {
                   icon: Phone,
                   k: "Contacto",
-                  t: "+593 96 779 4351",
-                  d: "+593 99 133 7101",
+                  t: "+593 99 133 7101",
+                  d: "WhatsApp y llamadas",
                 },
               ].map((c) => (
                 <div key={c.k} className="bg-background p-7">
@@ -1176,7 +1176,7 @@ function Footer() {
                 className="ul-link inline-flex items-center gap-2.5 text-background/85 hover:text-background"
               >
                 <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
-                +593 96 779 4351
+                +593 99 133 7101
               </a>
               <a
                 href="tel:+593991337101"
