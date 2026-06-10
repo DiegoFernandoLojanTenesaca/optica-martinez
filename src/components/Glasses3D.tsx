@@ -98,14 +98,18 @@ function Glasses() {
       {[-1, 1].map((s) => (
         <group key={s} position={[s * lensOffset, 0, 0]}>
           <mesh geometry={ringGeo} material={black} />
-          <mesh geometry={lensGeo} material={glass} scale={[1, 1, 0.16]} />
+          <mesh geometry={lensGeo} material={glass} scale={[1, 1, 0.09]} />
           <mesh geometry={glintGeo} material={glint} position={[-0.12, 0.18, 0.13]} rotation={[0, 0, 1.95]} />
         </group>
       ))}
 
-      {/* Puente */}
-      <mesh material={black} position={[0, 0.16, 0]}>
-        <torusGeometry args={[0.3, 0.05, 20, 60, Math.PI]} />
+      {/* Puente — conecta ambos aros (solapa los bordes internos) */}
+      <mesh material={black} position={[0, 0.04, 0]}>
+        <torusGeometry args={[0.2, 0.06, 20, 60, Math.PI]} />
+      </mesh>
+      {/* refuerzo recto del puente para que se vea unido */}
+      <mesh material={black} position={[0, 0.16, 0.02]}>
+        <boxGeometry args={[0.46, 0.06, 0.08]} />
       </mesh>
 
       {/* Plaquetas de nariz */}
