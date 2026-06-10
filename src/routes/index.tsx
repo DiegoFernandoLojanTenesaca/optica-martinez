@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Óptica en el centro de Loja: examen visual gratis, armazones de marca como MAX&Co y lentes de calidad. 5.0★ en Google. Atendido por el Lic. Luis Martínez.",
+          "Óptica en el centro de Loja: examen visual gratis, armazones de marca como MAX&Co y lentes de calidad. 5.0★ en Google.",
       },
       { property: "og:title", content: "Óptica Martínez · Loja, Ecuador" },
       {
