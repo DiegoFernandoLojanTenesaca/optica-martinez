@@ -197,7 +197,7 @@ function Hero() {
 
         <div className="relative grid grid-cols-12 gap-6 pt-10 lg:gap-10 lg:pt-16">
           {/* Headline — left, spans most of grid */}
-          <div className="col-span-12 lg:col-span-7 lg:pr-4">
+          <div className="col-span-12 lg:col-span-6 lg:pr-4">
             <h1
               className="font-display tracking-[-0.04em] ink"
               style={{
@@ -244,7 +244,7 @@ function Hero() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-3 rounded-full bg-[var(--color-ink)] px-7 py-4 text-xs font-medium uppercase tracking-[0.16em] text-background transition-all hover:bg-primary hover:shadow-[0_20px_40px_-20px_hsl(187_81%_29%/0.6)]"
+                className="group inline-flex items-center gap-3 rounded-full bg-[var(--color-ink)] px-7 py-4 text-xs font-medium uppercase tracking-[0.16em] text-background transition-all hover:bg-primary hover:shadow-[0_20px_40px_-20px_hsl(243_60%_47%/0.55)]"
               >
                 Reservar examen sin costo
                 <ArrowUpRight
@@ -297,7 +297,7 @@ function Hero() {
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: EASE, delay: 0.5 }}
-            className="relative col-span-12 -mr-6 h-[440px] sm:h-[560px] lg:col-span-5 lg:-mr-10 lg:h-[680px]"
+            className="relative col-span-12 h-[420px] sm:h-[520px] lg:col-span-6 lg:h-[560px]"
           >
             <div className="absolute inset-0 animate-float">
               <Suspense
@@ -473,16 +473,16 @@ function Services() {
 
 /* -------------------------------------------------------- COLLECTION */
 const collection = [
-  { name: "Aviator Heritage", brand: "MAX&Co", tone: "from-[#0A2E33] to-[#0E7C86]", h: "h-[520px]" },
-  { name: "Round Atelier", brand: "MAX&Co", tone: "from-[#F3F0E9] to-[#dcd6c6]", h: "h-[380px]" },
-  { name: "Cat Eye Editorial", brand: "MAX&Co", tone: "from-[#0E7C86] to-[#0A5A62]", h: "h-[440px]" },
-  { name: "Square Architect", brand: "MAX&Co", tone: "from-[#1c1f1e] to-[#0A2E33]", h: "h-[500px]" },
-  { name: "Wire Minimalist", brand: "MAX&Co", tone: "from-[#dcd6c6] to-[#F3F0E9]", h: "h-[360px]" },
-  { name: "Acetate Maison", brand: "MAX&Co", tone: "from-[#0A5A62] to-[#0A2E33]", h: "h-[480px]" },
+  { name: "Aviator Heritage", brand: "MAX&Co", tone: "from-[#14143E] to-[#322EC0]", h: "h-[520px]" },
+  { name: "Round Atelier", brand: "MAX&Co", tone: "from-[#EEF0FB] to-[#cbceef]", h: "h-[380px]" },
+  { name: "Cat Eye Editorial", brand: "MAX&Co", tone: "from-[#322EC0] to-[#24228A]", h: "h-[440px]" },
+  { name: "Square Architect", brand: "MAX&Co", tone: "from-[#1a1a30] to-[#14143E]", h: "h-[500px]" },
+  { name: "Wire Minimalist", brand: "MAX&Co", tone: "from-[#cbceef] to-[#EEF0FB]", h: "h-[360px]" },
+  { name: "Acetate Maison", brand: "MAX&Co", tone: "from-[#24228A] to-[#14143E]", h: "h-[480px]" },
 ];
 
 function GlassesSilhouette({ light = false }: { light?: boolean }) {
-  const stroke = light ? "#FBFBF9" : "#0A2E33";
+  const stroke = light ? "#FBFBFE" : "#14143E";
   return (
     <svg viewBox="0 0 220 90" className="w-3/5" fill="none">
       <circle cx="60" cy="45" r="32" stroke={stroke} strokeWidth="1.5" />
@@ -984,7 +984,7 @@ function FloatingWhatsApp() {
       href={WHATSAPP_URL}
       target="_blank"
       rel="noreferrer"
-      className="group fixed bottom-6 right-6 z-40 inline-flex items-center gap-3 rounded-full bg-[var(--color-ink)] px-5 py-3 text-xs font-medium uppercase tracking-[0.14em] text-background shadow-[0_20px_40px_-20px_hsl(187_67%_12%/0.5)] transition-all hover:bg-primary"
+      className="group fixed bottom-6 right-6 z-40 inline-flex items-center gap-3 rounded-full bg-[var(--color-ink)] px-5 py-3 text-xs font-medium uppercase tracking-[0.14em] text-background shadow-[0_20px_40px_-20px_hsl(240_52%_16%/0.5)] transition-all hover:bg-primary"
       aria-label="WhatsApp"
     >
       <MessageCircle className="h-4 w-4" strokeWidth={1.5} />

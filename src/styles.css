@@ -43,36 +43,36 @@
 :root {
   --radius: 0.5rem;
 
-  /* Editorial palette — bone, sand, ink-teal */
-  --background: hsl(60 16% 98%);            /* #FBFBF9 bone */
-  --surface: hsl(60 16% 98%);
-  --sand: hsl(42 22% 93%);                  /* #F3F0E9 warm sand */
-  --ink: hsl(187 67% 12%);                  /* #0A2E33 deep ink-teal */
+  /* Brand palette — white + indigo blue (rótulo "Martinez Optometry") */
+  --background: hsl(240 33% 99%);           /* #FBFBFE blanco frío */
+  --surface: hsl(240 33% 99%);
+  --sand: hsl(240 40% 97%);                 /* #F2F3FB azul muy claro */
+  --ink: hsl(240 52% 16%);                  /* #14143E azul-tinta */
 
-  --foreground: hsl(187 67% 12%);
-  --card: hsl(60 16% 98%);
-  --card-foreground: hsl(187 67% 12%);
-  --popover: hsl(60 16% 98%);
-  --popover-foreground: hsl(187 67% 12%);
+  --foreground: hsl(240 52% 16%);
+  --card: hsl(240 33% 99%);
+  --card-foreground: hsl(240 52% 16%);
+  --popover: hsl(240 33% 99%);
+  --popover-foreground: hsl(240 52% 16%);
 
-  --primary: hsl(187 81% 29%);              /* #0E7C86 */
-  --primary-foreground: hsl(60 16% 98%);
-  --primary-deep: hsl(187 81% 21%);         /* #0A5A62 */
+  --primary: hsl(243 60% 47%);              /* #322EC0 índigo de marca */
+  --primary-foreground: hsl(240 33% 99%);
+  --primary-deep: hsl(243 58% 34%);         /* #24228A */
 
-  --secondary: hsl(42 22% 93%);
-  --secondary-foreground: hsl(187 67% 12%);
-  --muted: hsl(42 18% 95%);
-  --muted-foreground: hsl(178 8% 30%);      /* warm gray #44504F */
-  --accent: hsl(187 50% 92%);
-  --accent-foreground: hsl(187 81% 21%);
+  --secondary: hsl(240 40% 97%);
+  --secondary-foreground: hsl(240 52% 16%);
+  --muted: hsl(240 33% 96%);
+  --muted-foreground: hsl(240 12% 38%);     /* gris azulado */
+  --accent: hsl(243 55% 93%);
+  --accent-foreground: hsl(243 58% 34%);
 
   --destructive: hsl(0 70% 45%);
-  --destructive-foreground: hsl(60 16% 98%);
+  --destructive-foreground: hsl(240 33% 99%);
 
-  --border: hsl(187 67% 12% / 0.1);         /* hairline = ink @ 10% */
-  --hairline: hsl(187 67% 12% / 0.1);
-  --input: hsl(187 67% 12% / 0.15);
-  --ring: hsl(187 81% 29%);
+  --border: hsl(240 52% 16% / 0.1);         /* hairline = ink @ 10% */
+  --hairline: hsl(240 52% 16% / 0.1);
+  --input: hsl(240 52% 16% / 0.15);
+  --ring: hsl(243 60% 47%);
 }
 
 @layer base {
@@ -89,7 +89,7 @@
     text-rendering: optimizeLegibility;
     /* subtle grain */
     background-image:
-      radial-gradient(hsl(187 67% 12% / 0.025) 1px, transparent 1px);
+      radial-gradient(hsl(240 52% 16% / 0.025) 1px, transparent 1px);
     background-size: 3px 3px;
   }
 
@@ -131,7 +131,7 @@
     position: absolute; inset: 0;
     pointer-events: none;
     background-image:
-      radial-gradient(hsl(187 67% 12% / 0.04) 1px, transparent 1px);
+      radial-gradient(hsl(240 52% 16% / 0.04) 1px, transparent 1px);
     background-size: 3px 3px;
     mix-blend-mode: multiply;
   }
