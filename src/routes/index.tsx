@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState, type MouseEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import {
@@ -53,6 +53,13 @@ const WA_NUMBER = "593967794351";
 const wa = (msg: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 const WHATSAPP_URL = wa("Hola, quiero agendar mi examen visual gratis 👓");
 
+// Scroll suave SIN dejar el #hash en la URL
+function scrollToId(e: MouseEvent<HTMLAnchorElement>, href: string) {
+  if (!href.startsWith("#")) return;
+  e.preventDefault();
+  document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const navItems = [
@@ -87,7 +94,7 @@ function Header() {
       }`}
     >
       <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6 px-6 py-5 lg:px-10">
-        <a href="#top" className="flex items-center gap-3">
+        <a href="#top" onClick={(e) => scrollToId(e, "#top")} className="flex items-center gap-3">
           <motion.img
             src="/logo.jpg"
             alt="Óptica Martínez Optometría"
@@ -114,6 +121,7 @@ function Header() {
             <a
               key={n.href}
               href={n.href}
+              onClick={(e) => scrollToId(e, n.href)}
               className="group flex items-baseline gap-1.5 text-sm font-medium text-ink/80 transition-colors hover:text-primary"
             >
               <span className="text-[10px] text-primary/70">{n.n}</span>
@@ -149,7 +157,10 @@ function Header() {
               <a
                 key={n.href}
                 href={n.href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => {
+                  setOpen(false);
+                  scrollToId(e, n.href);
+                }}
                 className="flex items-baseline gap-3 border-b border-hairline py-4 text-base ink"
               >
                 <span className="text-[10px] text-primary">{n.n}</span>
@@ -263,6 +274,7 @@ function Hero() {
               </a>
               <a
                 href="#coleccion"
+                onClick={(e) => scrollToId(e, "#coleccion")}
                 className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] ink ul-link"
               >
                 Explorar la colección

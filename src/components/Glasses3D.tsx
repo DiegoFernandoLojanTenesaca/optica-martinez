@@ -115,9 +115,9 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
         </group>
       ))}
 
-      {/* Guiño del ojo izquierdo: el lente se cierra (párpado circular) */}
-      <group ref={lid} position={[-lensOffset, 0, 0.16]} scale={[1, 0, 1]}>
-        <mesh geometry={lidGeo} material={black} />
+      {/* Guiño del ojo izquierdo: el párpado CAE desde arriba (como un ojo real) */}
+      <group ref={lid} position={[-lensOffset, innerR, 0.16]} scale={[1, 0, 1]}>
+        <mesh geometry={lidGeo} material={black} position={[0, -innerR, 0]} />
       </group>
 
       {/* Puente */}
