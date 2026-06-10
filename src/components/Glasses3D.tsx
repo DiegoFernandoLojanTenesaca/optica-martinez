@@ -179,8 +179,8 @@ export default function Glasses3D() {
   return (
     <Canvas
       camera={{ position: [0, 0.05, mobile ? 8.2 : 5.9], fov: 32 }}
-      dpr={mobile ? 1 : [1, 1.8]}
-      gl={{ antialias: !mobile, alpha: true, powerPreference: "high-performance" }}
+      dpr={mobile ? [1, 2] : [1, 1.8]}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
     >
       <ambientLight intensity={mobile ? 0.85 : 0.5} />
