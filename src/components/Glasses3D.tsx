@@ -37,14 +37,14 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
     if (lid.current) {
       const c = t - winkT0.current;
       let v = 0;
-      if (c >= 0 && c < 0.32) v = Math.sin((c / 0.32) * Math.PI); // 0 → 1 → 0
+      if (c >= 0 && c < 0.85) v = Math.sin((c / 0.85) * Math.PI); // 0 → 1 → 0 (guiño lento)
       lid.current.scale.y = v;
     }
   });
 
-  const outerR = 0.93;
-  const innerR = 0.81; // marco MÁS DELGADO (outerR - innerR = 0.12)
-  const frameDepth = 0.16;
+  const outerR = 0.92;
+  const innerR = 0.83; // marco aún más FINO (outerR - innerR = 0.09)
+  const frameDepth = 0.14;
   const lensOffset = 1.04;
 
   // Aro redondo, delgado, con un poco de volumen
@@ -111,7 +111,7 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
   );
 
   return (
-    <group ref={group} scale={0.82}>
+    <group ref={group} scale={0.72}>
       {/* Ojos: aro + lente + reflejo (como el icono) */}
       {[-1, 1].map((s) => (
         <group key={s} position={[s * lensOffset, 0, 0]}>
@@ -126,8 +126,8 @@ function Glasses({ winkReq }: { winkReq: { current: boolean } }) {
         </group>
       ))}
 
-      {/* Párpado del guiño (ojo izquierdo) */}
-      <group ref={lid} position={[-lensOffset, innerR * 0.98, 0.11]} scale={[1, 0, 1]}>
+      {/* Párpado del guiño (ojo izquierdo) — delante del reflejo para taparlo al cerrar */}
+      <group ref={lid} position={[-lensOffset, innerR * 0.98, 0.18]} scale={[1, 0, 1]}>
         <mesh geometry={lidGeo} material={black} position={[0, -innerR * 0.98, 0]} />
       </group>
 
@@ -171,7 +171,7 @@ export default function Glasses3D() {
   const winkReq = useRef(false);
   return (
     <Canvas
-      camera={{ position: [0, 0.05, 5.2], fov: 32 }}
+      camera={{ position: [0, 0.05, 5.9], fov: 32 }}
       dpr={[1, 1.8]}
       gl={{ antialias: true, alpha: true }}
       style={{ background: "transparent" }}

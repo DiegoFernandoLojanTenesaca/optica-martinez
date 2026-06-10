@@ -206,17 +206,17 @@ function Hero() {
                 fontWeight: 400,
               }}
             >
-              <span className="block overflow-hidden">
+              <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
                 <motion.span custom={0} variants={heroLine} initial="hidden" animate="show" className="block">
                   Ver bien,
                 </motion.span>
               </span>
-              <span className="block overflow-hidden">
+              <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
                 <motion.span custom={1} variants={heroLine} initial="hidden" animate="show" className="block">
                   para <span className="display-italic text-primary">vivir</span>
                 </motion.span>
               </span>
-              <span className="block overflow-hidden">
+              <span className="block overflow-hidden pb-[0.2em] -mb-[0.2em]">
                 <motion.span custom={2} variants={heroLine} initial="hidden" animate="show" className="block">
                   <span className="display-italic">mejor.</span>
                 </motion.span>
