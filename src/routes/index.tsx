@@ -292,9 +292,8 @@ function Hero() {
               transition={{ duration: 0.8, ease: EASE, delay: 0.7 }}
               className="mt-10 max-w-md text-pretty text-base leading-relaxed text-muted-foreground"
             >
-              En pleno centro de Loja te revisamos la vista sin costo y te
-              ayudamos a elegir los lentes que mejor te quedan. Atendido por el
-              Lic. Luis Martínez, Mgtr.
+              Examen visual sin costo y armazones de marca en pleno centro de
+              Loja. Te ayudamos a elegir los lentes que mejor te queden.
             </motion.p>
 
             <motion.div
@@ -380,8 +379,8 @@ function Hero() {
               <span className="font-display text-sm ink">/ 001</span>
             </div>
             <div className="pointer-events-none absolute bottom-8 right-2 hidden text-right lg:block">
-              <span className="kicker">Modelo</span>
-              <div className="font-display text-sm ink">Aviator · MAX&Co</div>
+              <span className="kicker">Estilo</span>
+              <div className="font-display text-sm ink">Redondo · Acetato</div>
             </div>
           </motion.div>
         </div>
@@ -703,7 +702,6 @@ function About() {
           >
             {[
               { name: "Lic. Luis Martínez, Mgtr.", role: "Optómetra · Fundador", n: "01" },
-              { name: "Ana Gabriela Anguisaca", role: "Atención y asesoría visual", n: "02" },
             ].map((m) => (
               <div
                 key={m.name}
@@ -803,7 +801,7 @@ function Reviews() {
           intro={`${data.rating.toFixed(1)} estrellas en Google. Esto dicen quienes ya nos visitaron.`}
         />
 
-        <div className="mt-16 grid grid-cols-12 gap-x-6 gap-y-16 lg:gap-x-10">
+        <div className="mt-16 grid grid-cols-12 gap-x-6 gap-y-12 lg:gap-x-10">
           {data.reviews.map((r, i) => (
             <motion.figure
               key={r.name}
@@ -814,8 +812,8 @@ function Reviews() {
               className={`col-span-12 md:col-span-6 ${i % 2 === 1 ? "lg:mt-20" : ""}`}
             >
               <span
-                className="block font-display text-[8rem] leading-none text-primary/40 lg:text-[10rem]"
-                style={{ fontWeight: 300, marginBottom: "-1rem" }}
+                className="block font-display text-[3.5rem] leading-none text-primary/40 lg:text-[4.5rem]"
+                style={{ fontWeight: 300, marginBottom: "-1.25rem" }}
                 aria-hidden
               >
                 “
@@ -892,7 +890,7 @@ function Visit() {
                   icon: Phone,
                   k: "Contacto",
                   t: "+593 96 779 4351",
-                  d: "Tel. 099 133 7101",
+                  d: "+593 99 133 7101",
                 },
               ].map((c) => (
                 <div key={c.k} className="bg-background p-7">
@@ -946,7 +944,7 @@ function Visit() {
                   className="inline-flex items-center gap-2 rounded-full border border-hairline px-6 py-3.5 text-xs font-medium uppercase tracking-[0.16em] ink transition-colors hover:border-[var(--color-ink)]"
                 >
                   <Phone className="h-4 w-4" strokeWidth={1.5} />
-                  099 133 7101
+                  +593 99 133 7101
                 </a>
                 <a
                   href="https://www.google.com/maps/dir/?api=1&destination=Optica+Martinez+Loja&destination_place_id=ChIJc16zJYk3y5ERHamuouhxCF8"
@@ -1054,7 +1052,7 @@ function Footer() {
                 className="ul-link inline-flex items-center gap-2.5 text-background/85 hover:text-background"
               >
                 <Phone className="h-4 w-4" strokeWidth={1.5} />
-                099 133 7101
+                +593 99 133 7101
               </a>
               <a
                 href="https://www.instagram.com/martinezoptometry/"
