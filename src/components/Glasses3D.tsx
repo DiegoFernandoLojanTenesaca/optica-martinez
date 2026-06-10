@@ -121,16 +121,16 @@ function Glasses() {
 
       {/* Bisagras + patillas — nacen DENTRO del marco y el botón cubre la unión */}
       {[-1, 1].map((s) => {
-        const hingeX = s * (lensOffset + outerR - 0.08); // dentro del marco externo
+        const hingeX = s * (lensOffset + outerR - 0.15); // bien dentro del marco
         return (
           <group key={`temple-${s}`} position={[hingeX, 0, 0]}>
             {/* botón de bisagra: cubre la unión aro-patilla */}
             <mesh material={black} position={[0, 0, 0.04]}>
-              <sphereGeometry args={[0.09, 20, 20]} />
+              <sphereGeometry args={[0.11, 20, 20]} />
             </mesh>
             {/* patilla: nace pegada al marco y va recta hacia atrás */}
-            <mesh material={black} position={[s * 0.05, 0, -0.7]} rotation={[0, s * 0.05, 0]}>
-              <boxGeometry args={[0.075, 0.085, 1.5]} />
+            <mesh material={black} position={[s * 0.07, 0, -0.64]} rotation={[0, s * 0.05, 0]}>
+              <boxGeometry args={[0.075, 0.085, 1.6]} />
             </mesh>
             {/* terminal (codo) que baja detrás de la oreja */}
             <mesh material={black} position={[s * 0.12, -0.14, -1.4]} rotation={[0.5, s * 0.05, 0]}>
