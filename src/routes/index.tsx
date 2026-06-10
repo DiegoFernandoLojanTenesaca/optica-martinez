@@ -993,7 +993,7 @@ function Footer() {
   return (
     <footer className="bg-[var(--color-ink)] text-background">
       <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10">
-        <div className="grid grid-cols-12 gap-10 border-b border-background/15 pb-14">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-10 border-b border-background/15 pb-14 lg:gap-10">
           {/* Marca + CTA */}
           <div className="col-span-12 lg:col-span-6">
             <img
